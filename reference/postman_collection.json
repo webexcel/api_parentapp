@@ -1,0 +1,387 @@
+{
+    "info": {
+        "name": "SchoolTree Parent Portal API",
+        "description": "Complete API collection for SchoolTree Parent Portal with authentication, dashboard, and circular endpoints",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:3005/api",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "dbname",
+            "value": "appdemoo",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "Mobile Install (Register Device)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"mobile_no\": \"9600037999\",\n  \"platform_type\": \"Web\",\n  \"manufacturer_name\": \"Browser\",\n  \"manufacturer_model\": \"Chrome\",\n  \"os_version\": \"1.0\",\n  \"app_version_code\": \"1.0.0\",\n  \"dbname\": \"{{dbname}}\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/mobileInstallsNew",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "mobileInstallsNew"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Verify OTP",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"id\": \"INSTALL_ID_FROM_PREVIOUS_STEP\",\n  \"otp\": \"0000\",\n  \"dbname\": \"{{dbname}}\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/mobileInstallerVerify",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "mobileInstallerVerify"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Student Details",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"id\": \"INSTALL_ID\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/getMobStudentDetail",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "getMobStudentDetail"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Student Photo",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"adno\": \"9230\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/getMobStudentPhoto",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "getMobStudentPhoto"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update Firebase ID",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"firebase_id\": \"your_firebase_token\",\n  \"mobile_no\": \"9600037999\",\n  \"dbname\": \"{{dbname}}\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/updateParentFirebaseId",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "updateParentFirebaseId"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Dashboard",
+            "item": [
+                {
+                    "name": "Get Latest Message",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"mobile_number\": \"9600037999\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/dashboard/getLatestMessage",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dashboard",
+                                "getLatestMessage"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Flash Message",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/dashboard/getFlashMessage?dbname={{dbname}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dashboard",
+                                "getFlashMessage"
+                            ],
+                            "query": [
+                                {
+                                    "key": "dbname",
+                                    "value": "{{dbname}}"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Check Fees Balance",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"adno\": [\"9230\", \"48/2022\"]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/dashboard/checkFeesBalance",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dashboard",
+                                "checkFeesBalance"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get ID Card",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"adno\": \"9230\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/dashboard/getIdCard",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dashboard",
+                                "getIdCard"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Forgot Password",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"mobile_no\": \"9600037999\",\n  \"dbname\": \"{{dbname}}\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/dashboard/forgotPassword",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dashboard",
+                                "forgotPassword"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Circulars",
+            "item": [
+                {
+                    "name": "Get All Circulars (Paginated)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"mobile_number\": \"9600037999\",\n  \"page_size\": 10,\n  \"current_size\": 0\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/circular/getAllMessagesByMobileNumber",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "circular",
+                                "getAllMessagesByMobileNumber"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Base64 Image",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"url\": \"https://demo.schooltree.in/uploads/appdemoo/image.jpg\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/circular/getBase64",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "circular",
+                                "getBase64"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

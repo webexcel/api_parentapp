@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alpha Portal - Circulars</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563EB", // Royal Blue from the active sidebar item
+                        "primary-light": "#EFF6FF",
+                        "primary-dark": "#1E40AF",
+                        "background-light": "#F3F4F6", // Light gray background
+                        "background-dark": "#111827", // Dark mode background
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1F2937",
+                        "text-light": "#1F2937",
+                        "text-dark": "#F9FAFB",
+                        "secondary-text-light": "#6B7280",
+                        "secondary-text-dark": "#9CA3AF",
+                        "border-light": "#E5E7EB",
+                        "border-dark": "#374151",
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'xl': "1rem",
+                        '2xl': "1.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans antialiased transition-colors duration-200">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex-shrink-0 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark flex flex-col transition-colors duration-200">
+<div class="h-16 flex items-center px-6 border-b border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-primary">
+<span class="material-icons-outlined text-xl">school</span>
+</div>
+<span class="font-bold text-lg text-text-light dark:text-text-dark">Alpha Portal</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="bg-blue-50 dark:bg-blue-900/10 p-3 rounded-xl flex items-center gap-3 border border-blue-100 dark:border-blue-900/30">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+<img alt="Pranav" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc_vbxLoOcPH4r76wz6CWXLdT41VeMuXTelzMAsI-qAa3cx-DIOuGwyf4wrWRgX_8CpKjp8eTWxuBZPF8LbYv2gjo4fokonlXFgvrMDaBnep9uDwciULfLSY1WIYkany7uDr8-MISm5c5gPJcJsjf9zzoGYdrAwN1u18T2OvBwl8Ba2aXEEIv-95IqgFwqdF2_A6bGN0XE-RmmPqBOt2-EO12w9L44DKnuzwnpEuUQGSuBpDAUjwBdMDY4TU8vsrcpofHr3ApZy46K"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-text-light dark:text-text-dark">Pranav OG</span>
+<span class="text-xs text-blue-600 dark:text-blue-400 font-medium">Class IV-C</span>
+</div>
+<div class="ml-auto text-blue-500">
+<span class="material-icons-outlined text-base">check_circle</span>
+</div>
+</div>
+<div class="bg-transparent p-3 rounded-xl flex items-center gap-3 border border-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-300 font-semibold text-sm flex-shrink-0">
+             AV
+        </div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-secondary-text-light dark:text-gray-300">Arivumathi V</span>
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark">Class I-A</span>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">dashboard</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">person</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">My Student</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 bg-primary text-white rounded-lg shadow-sm" href="#">
+<span class="material-icons-outlined">campaign</span>
+<span class="font-medium">Circulars</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">school</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Academics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">payments</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Fee Payment</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">directions_bus</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Transport</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">event</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Events</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">settings</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-light dark:border-border-dark">
+<a class="flex items-center gap-3 px-3 py-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors justify-center" href="#">
+<span class="material-icons-outlined">logout</span>
+<span class="font-medium">Sign Out</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden relative">
+<header class="h-16 bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark flex items-center justify-between px-8 flex-shrink-0 transition-colors duration-200">
+<h1 class="text-xl font-bold text-text-light dark:text-text-dark">Circulars &amp; Announcements</h1>
+<div class="flex items-center gap-6">
+<button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-primary transition-colors">
+<span class="material-icons-outlined">search</span>
+</button>
+<button class="relative text-secondary-text-light dark:text-secondary-text-dark hover:text-primary transition-colors">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 pl-6 border-l border-border-light dark:border-border-dark">
+<img alt="Profile" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxgcMdiJsn9rx_Nb4iczRKElBg4hVP4vQoLDmGE-qvcspu4rmQ70DfgYZmkTBvrJh0stzXFYGJLWw1yOBHn9M0n2OBJBEh-RdLWpUXeWF3PNB5AMIvsj0TZAagS84QWt-lrB2SvqNHX-NgG6NEwH859Ohrc7pq0Hwryyx7FOZJ6y6uPx_9oj9flHMzmeUlB1ZbWBfDTuC0NeT44M4Q8iKbFEuc-J1FcdUSOeZbGzZzeWKD5P5hNia6LD6i-8fuo6yVUWbosjpI5gN7"/>
+<span class="material-icons-outlined text-secondary-text-light dark:text-secondary-text-dark text-sm">expand_more</span>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 bg-background-light dark:bg-background-dark">
+<div class="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between">
+<div class="relative w-full">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-text-light dark:text-secondary-text-dark material-icons-outlined">search</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-secondary-text-light dark:placeholder-secondary-text-dark" placeholder="Search circulars..." type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-sm border border-border-light dark:border-border-dark hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="mb-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 rounded-md text-xs font-semibold">
+<span class="material-icons-outlined text-sm">face</span>
+                            For: Pranav OG (Class IV-C)
+                        </div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-red-50 dark:bg-red-900/20 rounded-xl flex items-center justify-center text-red-500">
+<span class="material-icons-outlined text-2xl">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg text-text-light dark:text-text-dark mb-1">Annual Sports Day Guidelines</h3>
+<span class="text-xs font-medium px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-full">New</span>
+</div>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-sm mb-4 line-clamp-2">Please find attached the detailed guidelines and schedule for the upcoming Annual Sports Day. Ensure all participants read through the rules carefully.</p>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-3 bg-background-light dark:bg-gray-800 rounded-lg p-2 pr-4 border border-border-light dark:border-border-dark cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<div class="w-8 h-8 bg-white dark:bg-surface-dark rounded flex items-center justify-center shadow-sm">
+<span class="material-icons-outlined text-red-500 text-sm">picture_as_pdf</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-text-light dark:text-text-dark">Sports_Day_2024.pdf</span>
+<span class="text-[10px] text-secondary-text-light dark:text-secondary-text-dark">2.4 MB</span>
+</div>
+</div>
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark ml-auto">Oct 24, 2023 • 10:30 AM</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-sm border border-border-light dark:border-border-dark hover:shadow-md transition-shadow">
+<div class="mb-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded-md text-xs font-semibold">
+<span class="material-icons-outlined text-sm">face</span>
+                            For: Arivumathi V (Class I-A)
+                        </div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center text-purple-500">
+<span class="material-icons-outlined text-2xl">mic</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg text-text-light dark:text-text-dark mb-1">Principal's Welcome Note</h3>
+</div>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-sm mb-4">A special welcome message from our Principal regarding the new academic term.</p>
+<div class="bg-background-light dark:bg-gray-800 rounded-xl p-3 flex items-center gap-3 border border-border-light dark:border-border-dark max-w-md">
+<button class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white shadow-sm hover:bg-primary-dark transition-colors">
+<span class="material-icons-outlined text-sm ml-0.5">play_arrow</span>
+</button>
+<div class="flex-1 h-8 flex items-center gap-1">
+<div class="w-1 h-3 bg-primary/40 rounded-full animate-pulse"></div>
+<div class="w-1 h-5 bg-primary/60 rounded-full animate-pulse delay-75"></div>
+<div class="w-1 h-4 bg-primary/40 rounded-full animate-pulse delay-150"></div>
+<div class="w-1 h-6 bg-primary rounded-full animate-pulse"></div>
+<div class="w-1 h-4 bg-primary/60 rounded-full animate-pulse delay-100"></div>
+<div class="w-1 h-3 bg-primary/40 rounded-full animate-pulse delay-75"></div>
+<div class="w-1 h-5 bg-primary/30 rounded-full animate-pulse"></div>
+<div class="w-1 h-2 bg-primary/20 rounded-full"></div>
+<div class="w-1 h-3 bg-primary/20 rounded-full"></div>
+<div class="w-1 h-2 bg-primary/20 rounded-full"></div>
+<div class="w-full h-1 bg-gray-300 dark:bg-gray-600 rounded-full ml-2 relative">
+<div class="absolute left-0 top-0 h-full w-1/3 bg-primary rounded-full"></div>
+</div>
+</div>
+<span class="text-xs font-medium text-secondary-text-light dark:text-secondary-text-dark">1:45</span>
+</div>
+<div class="mt-3 flex justify-end">
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark">Oct 23, 2023 • 09:00 AM</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-sm border border-border-light dark:border-border-dark hover:shadow-md transition-shadow">
+<div class="mb-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 rounded-md text-xs font-semibold">
+<span class="material-icons-outlined text-sm">face</span>
+                            For: Pranav OG (Class IV-C)
+                        </div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-green-50 dark:bg-green-900/20 rounded-xl flex items-center justify-center text-green-500">
+<span class="material-icons-outlined text-2xl">image</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg text-text-light dark:text-text-dark mb-1">Science Exhibition Highlights</h3>
+</div>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-sm mb-4">We are thrilled to share some glimpses from yesterday's Science Exhibition. The students' projects were truly innovative!</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-3">
+<div class="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden relative group cursor-pointer">
+<img alt="Science Fair Project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyX-T_u6Kb8WogTgEGYHpg0brtqR_sHSPAoem-T1eM51uiOC-5Jman8NdlbRCcAi1ucqZs0URwerRXMK-nVcleDlkn4n9MY-x8KAmTwW3J-v-0F8xWTQeWJI6_mXkik9zP-83koouwMcnd0D09thBN1H1-Dbqb7K8guuY6MK7wv1o8YngyK0pwH4p2eTQDP6j8JoBUQtGvq11Ocm17Rwmu4cBQE_I90oTi0SEIV67kAlZz9Oklr_snKbiSrwZqJc5ca47El5dsIwNH"/>
+</div>
+<div class="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden relative group cursor-pointer">
+<img alt="Students Explaining" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXD7BgdAmiHlCCyvohG0aJkRfbp69_Ff06ogVyQQKvIsW5pWKxth87DhA1sM_RPaSZVyBHenUC8ov2cj-EEyTkLONL9Jwvlqemf-wbV4tpLRoZsSy5qDQbEH5tbo9WGHxZhmh47xz4B0j4GqJAXgXJzyfjlMjNUVkk5eLLoy4kIHPO_4j6unU3mtPCdNRlfIKWH-3sYRqm9bzcMMb0UQAffDRyZ_GKFFDvZxqYyyCSC_ug_XRxeGPIwrtPSPQtkYiRUNjPrIsNWBiM"/>
+</div>
+<div class="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden relative group cursor-pointer">
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+<span class="text-white font-bold text-lg">+5</span>
+</div>
+<img alt="Robotics Display" class="w-full h-full object-cover blur-[1px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnMBn8ueFsaEp9jDYsJZy9fcALmXnSb_2NU7wOeC-rCp43FH4mgi3ijUhxbRUUR1vah1q51lDei0ZbKK6NUcJPEGcHgyLQSr9YI3ggkviMif_9um1XQ1jpxx5A9B2MVkh_yVTzHmkGBrQ9vcATqDvZR_1T7Kls5uUgv23rstqw8dAB2rmkPY9pvF2B46SCSsQdjAD1WyldXDhKhpBSresLczD3-mv-gydNixoxK4U8E546zQV79B9_syOOYjjldCunplY9ROUp87Wv"/>
+</div>
+</div>
+<div class="flex justify-end">
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark">Oct 22, 2023 • 2:15 PM</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-sm border border-border-light dark:border-border-dark hover:shadow-md transition-shadow">
+<div class="mb-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded-md text-xs font-semibold">
+<span class="material-icons-outlined text-sm">face</span>
+                            For: Arivumathi V (Class I-A)
+                        </div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-pink-50 dark:bg-pink-900/20 rounded-xl flex items-center justify-center text-pink-500">
+<span class="material-icons-outlined text-2xl">videocam</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg text-text-light dark:text-text-dark mb-1">Annual Day Rehearsal Video</h3>
+</div>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-sm mb-4">Watch the dance rehearsal for Class 5. Parents are requested to ensure costumes are ready by Friday.</p>
+<div class="relative w-full max-w-lg aspect-video bg-black rounded-xl overflow-hidden group cursor-pointer">
+<img alt="Dance Performance" class="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv1OfX1lhAyRml2mumMyLvrgdP6ppl-m5sZhjDCHMi3lVzwZA0PQNlBv2CXU2xL6HW1sHeHIimu1pbooFgkgr6kI6qVwhWErAQDcGFilbjekUtbJTQTl9PBiL7wZyJbevJO12funcdgV2JSBuWg9oyWOeLF7so0sk5bHIzezgK1FIm2zh-VeS7_h1F1ZAbIqHNsL2WVn7ito8h8E6dtqhe-MqN2hQjaqeLpQYpfRV2rY0Zy0IEWPnDkeateR6nDy9LsG2qcyLwEB0G"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+<div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
+<span class="material-icons-outlined text-primary text-xl ml-0.5">play_arrow</span>
+</div>
+</div>
+</div>
+<span class="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded">04:32</span>
+</div>
+<div class="mt-3 flex justify-end">
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark">Oct 20, 2023 • 11:00 AM</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-sm border border-border-light dark:border-border-dark hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="mb-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 rounded-md text-xs font-semibold">
+<span class="material-icons-outlined text-sm">face</span>
+                            For: Pranav OG (Class IV-C)
+                        </div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-blue-600">
+<span class="material-icons-outlined text-2xl">description</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg text-text-light dark:text-text-dark mb-1">Updated Holiday Homework List</h3>
+</div>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-sm mb-4">The holiday homework list has been updated with a few changes for Mathematics and English. Please refer to the attached document.</p>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-3 bg-background-light dark:bg-gray-800 rounded-lg p-2 pr-4 border border-border-light dark:border-border-dark cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<div class="w-8 h-8 bg-white dark:bg-surface-dark rounded flex items-center justify-center shadow-sm">
+<span class="material-icons-outlined text-blue-600 text-sm">description</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-text-light dark:text-text-dark">Homework_Updated.docx</span>
+<span class="text-[10px] text-secondary-text-light dark:text-secondary-text-dark">128 KB</span>
+</div>
+</div>
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark ml-auto">Oct 18, 2023 • 03:45 PM</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-sm border border-border-light dark:border-border-dark hover:shadow-md transition-shadow">
+<div class="mb-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md text-xs font-semibold">
+<span class="material-icons-outlined text-sm">groups</span>
+                            For: All Students
+                        </div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl flex items-center justify-center text-yellow-600">
+<span class="material-icons-outlined text-2xl">notifications_active</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg text-text-light dark:text-text-dark mb-1">Early Dismissal Notice</h3>
+</div>
+<p class="text-secondary-text-light dark:text-secondary-text-dark text-sm mb-2">Dear Parents,</p>
+<p class="text-text-light dark:text-text-dark text-sm leading-relaxed">
+                                Please be informed that the school will dismiss at 12:30 PM tomorrow, Friday, Oct 27th, due to the staff development workshop. Buses will depart at 12:45 PM. Please make necessary arrangements to pick up your ward on time.
+                            </p>
+<div class="mt-3 flex justify-end">
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark">Oct 15, 2023 • 08:00 AM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-center pb-8">
+<nav class="flex items-center gap-1">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light dark:border-border-dark text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">
+<span class="material-icons-outlined text-lg">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white text-sm font-medium">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light dark:border-border-dark text-text-light dark:text-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm font-medium">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light dark:border-border-dark text-text-light dark:text-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm font-medium">3</button>
+<span class="w-10 h-10 flex items-center justify-center text-secondary-text-light dark:text-secondary-text-dark">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-border-light dark:border-border-dark text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<span class="material-icons-outlined text-lg">chevron_right</span>
+</button>
+</nav>
+</div>
+</div>
+</main>
+</div>
+<script>
+    // Simple script to toggle dark mode based on system preference initially
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+    }
+</script>
+</body></html>

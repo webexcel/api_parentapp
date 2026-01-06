@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>View Marks - Alpha Portal School App</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3b82f6", // Blue-500 equivalent based on screenshot
+                        "primary-dark": "#2563eb",
+                        "background-light": "#f3f4f6",
+                        "background-dark": "#111827",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1f2937",
+                        "text-light": "#1f2937",
+                        "text-dark": "#f3f4f6",
+                        "subtext-light": "#6b7280",
+                        "subtext-dark": "#9ca3af",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569; 
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; 
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-200">
+<div class="flex h-screen overflow-hidden">
+<aside class="hidden md:flex flex-col w-64 bg-card-light dark:bg-card-dark border-r border-gray-200 dark:border-gray-700 h-full fixed left-0 top-0 z-20">
+<div class="flex items-center justify-center h-16 border-b border-gray-200 dark:border-gray-700 shrink-0">
+<div class="flex items-center gap-2">
+<span class="material-icons-outlined text-primary text-3xl">school</span>
+<span class="text-xl font-bold tracking-tight text-gray-800 dark:text-white">AlphaPortal</span>
+</div>
+</div>
+<div class="p-4 border-b border-gray-200 dark:border-gray-700 shrink-0 space-y-3">
+<div class="flex items-center gap-3 p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
+<div class="h-10 w-10 rounded-full bg-orange-200 flex items-center justify-center shrink-0 overflow-hidden">
+<span class="text-orange-700 font-bold text-sm">P</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-gray-900 dark:text-white truncate">Pranav OG</p>
+<p class="text-xs text-primary font-medium truncate">Class IV-C</p>
+</div>
+<span class="material-icons-outlined text-primary text-base">check_circle</span>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
+<span class="text-purple-600 font-bold text-sm">AV</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-gray-900 dark:text-white truncate">Arivumathi V</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 truncate">Class I-A</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined">person</span>
+                    Profile
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined">schedule</span>
+                    Timetable
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg bg-primary/10 text-primary dark:text-blue-400" href="#">
+<span class="material-icons-outlined">grade</span>
+                    View Marks
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined">event</span>
+                    Attendance
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined">payments</span>
+                    Fees
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined">chat</span>
+                    Communications
+                </a>
+</nav>
+<div class="border-t border-gray-200 dark:border-gray-700 p-4 shrink-0">
+<button class="flex items-center gap-3 w-full px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
+<span class="material-icons-outlined">logout</span>
+                    Sign Out
+                </button>
+</div>
+</aside>
+<div class="flex-1 flex flex-col md:ml-64 h-full relative">
+<header class="md:hidden flex items-center justify-between h-16 px-4 bg-primary text-white shadow-md z-30">
+<button class="p-1 rounded hover:bg-white/10">
+<span class="material-icons-outlined">menu</span>
+</button>
+<h1 class="text-lg font-semibold">View Marks</h1>
+<button class="p-1 rounded hover:bg-white/10">
+<span class="material-icons-outlined">grid_view</span>
+</button>
+</header>
+<header class="hidden md:flex items-center justify-between h-16 px-8 bg-card-light dark:bg-card-dark border-b border-gray-200 dark:border-gray-700 sticky top-0 z-20">
+<div>
+<h1 class="text-2xl font-bold text-gray-800 dark:text-white">Student Marks</h1>
+<p class="text-sm text-subtext-light dark:text-subtext-dark">View and analyze academic performance</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-400 transition-colors">
+<span class="material-icons-outlined">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+                        P
+                    </div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto p-4 md:p-8">
+<div class="max-w-7xl mx-auto space-y-6">
+<div class="border-b border-gray-200 dark:border-gray-700 mb-6">
+<nav aria-label="Tabs" class="-mb-px flex space-x-8">
+<button class="border-primary text-primary whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2">
+<span class="material-icons-outlined text-base">face</span> ARIVUMATHI V
+                            </button>
+<button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 transition-colors">
+<span class="material-icons-outlined text-base">face</span> PRANAV OG
+                            </button>
+<button class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 transition-colors">
+<span class="material-icons-outlined text-base">face_3</span> LAVANYA
+                            </button>
+</nav>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
+<div class="md:col-span-5">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="year">Select Year</label>
+<div class="relative">
+<input class="w-full rounded-lg border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:border-primary focus:ring-primary sm:text-sm p-3 cursor-pointer" id="year" name="year" readonly="" type="text" value="2025-2026 Selected"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+<span class="material-icons-outlined text-gray-400">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-5">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="exam">Select Exam</label>
+<div class="relative">
+<input class="w-full rounded-lg border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:border-primary focus:ring-primary sm:text-sm p-3 cursor-pointer" id="exam" name="exam" readonly="" type="text" value="Term-I Selected"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+<span class="material-icons-outlined text-gray-400">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-2">
+<button class="w-full bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow transition-colors flex justify-center items-center gap-2">
+<span class="material-icons-outlined text-sm">filter_alt</span> SUBMIT
+                                </button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800/50">
+<h3 class="font-semibold text-lg text-gray-800 dark:text-white">Report Card</h3>
+<span class="text-xs font-medium px-2.5 py-0.5 rounded bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">Passed</span>
+</div>
+<div class="p-6">
+<div class="bg-primary rounded-xl text-white p-6 shadow-lg mb-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 opacity-10 transform translate-x-4 -translate-y-4">
+<span class="material-icons-outlined text-9xl">school</span>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-end mb-4 border-b border-white/20 pb-2">
+<h4 class="text-xl font-bold">Term-I Results</h4>
+<span class="text-sm opacity-80">2025-2026</span>
+</div>
+<ul class="space-y-4">
+<li class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-white/20 rounded-lg">
+<span class="material-icons-outlined text-sm">menu_book</span>
+</div>
+<span class="font-medium text-lg">English</span>
+</div>
+<span class="text-2xl font-bold">87<span class="text-sm opacity-60 font-normal">/100</span></span>
+</li>
+<li class="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-white h-full rounded-full" style="width: 87%"></div>
+</li>
+<li class="flex justify-between items-center pt-2">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-white/20 rounded-lg">
+<span class="material-icons-outlined text-sm">functions</span>
+</div>
+<span class="font-medium text-lg">Mathematics</span>
+</div>
+<span class="text-2xl font-bold">80<span class="text-sm opacity-60 font-normal">/100</span></span>
+</li>
+<li class="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-white h-full rounded-full" style="width: 80%"></div>
+</li>
+<li class="flex justify-between items-center pt-2">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-white/20 rounded-lg">
+<span class="material-icons-outlined text-sm">science</span>
+</div>
+<span class="font-medium text-lg">Science</span>
+</div>
+<span class="text-2xl font-bold">92<span class="text-sm opacity-60 font-normal">/100</span></span>
+</li>
+<li class="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-white h-full rounded-full" style="width: 92%"></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg text-center">
+<span class="text-subtext-light dark:text-subtext-dark text-xs uppercase tracking-wider block mb-1">Total Marks</span>
+<span class="text-2xl font-bold text-gray-800 dark:text-white">259</span>
+<span class="text-xs text-gray-400">/ 300</span>
+</div>
+<div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg text-center">
+<span class="text-subtext-light dark:text-subtext-dark text-xs uppercase tracking-wider block mb-1">Percentage</span>
+<span class="text-2xl font-bold text-primary">86.3%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800/50">
+<h3 class="font-semibold text-lg text-gray-800 dark:text-white">Performance Overview</h3>
+<select class="bg-transparent text-xs text-gray-500 border-none focus:ring-0 cursor-pointer">
+<option>This Year</option>
+<option>Last Year</option>
+</select>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-end">
+<div class="flex items-end justify-between h-64 w-full gap-2 md:gap-4 px-2">
+<div class="flex flex-col items-center gap-2 group w-full">
+<div class="relative w-full flex justify-center items-end h-full">
+<div class="w-full md:w-12 bg-blue-200 dark:bg-blue-900/50 rounded-t-md h-[0%] group-hover:bg-blue-300 transition-all duration-500 flex items-end justify-center relative" style="height: 65%;">
+<div class="absolute -top-8 text-xs font-bold text-gray-600 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">65%</div>
+</div>
+</div>
+<span class="text-xs font-medium text-gray-500 dark:text-gray-400">Unit 1</span>
+</div>
+<div class="flex flex-col items-center gap-2 group w-full">
+<div class="relative w-full flex justify-center items-end h-full">
+<div class="w-full md:w-12 bg-blue-300 dark:bg-blue-800/50 rounded-t-md h-[0%] group-hover:bg-blue-400 transition-all duration-500 flex items-end justify-center relative" style="height: 72%;">
+<div class="absolute -top-8 text-xs font-bold text-gray-600 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">72%</div>
+</div>
+</div>
+<span class="text-xs font-medium text-gray-500 dark:text-gray-400">Unit 2</span>
+</div>
+<div class="flex flex-col items-center gap-2 group w-full">
+<div class="relative w-full flex justify-center items-end h-full">
+<div class="w-full md:w-12 bg-blue-400 dark:bg-blue-700/50 rounded-t-md h-[0%] group-hover:bg-blue-500 transition-all duration-500 flex items-end justify-center relative" style="height: 78%;">
+<div class="absolute -top-8 text-xs font-bold text-gray-600 dark:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">78%</div>
+</div>
+</div>
+<span class="text-xs font-medium text-gray-500 dark:text-gray-400">Mid-Term</span>
+</div>
+<div class="flex flex-col items-center gap-2 group w-full">
+<div class="relative w-full flex justify-center items-end h-full">
+<div class="w-full md:w-12 bg-primary rounded-t-md h-[0%] shadow-lg shadow-blue-500/30 flex items-end justify-center relative" style="height: 86%;">
+<div class="absolute -top-8 text-xs font-bold text-primary dark:text-blue-400">86.3%</div>
+</div>
+</div>
+<span class="text-xs font-bold text-primary dark:text-blue-400">Term 1</span>
+</div>
+<div class="flex flex-col items-center gap-2 group w-full">
+<div class="relative w-full flex justify-center items-end h-full">
+<div class="w-full md:w-12 bg-gray-100 dark:bg-gray-800 rounded-t-md h-[0%] border-t border-x border-gray-200 dark:border-gray-700 border-dashed" style="height: 90%;"></div>
+</div>
+<span class="text-xs font-medium text-gray-400">Unit 3</span>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
+<p class="text-sm text-gray-500 dark:text-gray-400">
+<span class="font-semibold text-gray-700 dark:text-gray-300">Analysis:</span> 
+                                        Consistent improvement shown across terms. Term 1 performance is <span class="text-green-600 font-medium">+8.3%</span> higher than Mid-Term.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+<h3 class="font-semibold text-lg text-gray-800 dark:text-white">Detailed Subject Breakdown</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+<thead class="bg-gray-50 dark:bg-gray-800">
+<tr>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider" scope="col">Subject</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider" scope="col">Max Marks</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider" scope="col">Obtained</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider" scope="col">Grade</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider" scope="col">Remarks</th>
+</tr>
+</thead>
+<tbody class="bg-card-light dark:bg-card-dark divide-y divide-gray-200 dark:divide-gray-700">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">English</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">100</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white font-semibold">87</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-primary font-bold">A2</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Excellent progress</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Mathematics</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">100</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white font-semibold">80</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-primary font-bold">B1</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Good, needs practice</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">Science</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">100</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white font-semibold">92</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-primary font-bold">A1</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Outstanding</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<script>
+        // Simple animation trigger
+        document.addEventListener('DOMContentLoaded', () => {
+            const bars = document.querySelectorAll('[style*="height: 0%"]');
+            setTimeout(() => {
+                bars.forEach(bar => {
+                    // This is a hacky way to force the transition in standard CSS within Tailwind
+                    // In a real app, you'd calculate this or use JS to set the final height
+                    const targetHeight = bar.parentElement.querySelector('div').getAttribute('style').replace('height: 0%', ''); 
+                    // Since I hardcoded the height in the HTML style attribute for the final state in my mind, 
+                    // I'll just let the CSS transition handle it by removing a 'h-0' class if I had used it, 
+                    // or here I am relying on the fact that I put the target height in the style tag 
+                    // but initialized it visually with h-[0%] class which overrides inline style? 
+                    // Actually, inline style has higher specificity.
+                    // Let's fix the animation logic:
+                    // The inline styles currently set the TARGET height.
+                    // To animate, we should start at 0.
+                    const finalHeight = bar.style.height;
+                    bar.style.height = '0%';
+                    setTimeout(() => {
+                        bar.style.height = finalHeight;
+                    }, 100);
+                });
+            }, 100);
+        });
+    </script>
+</body></html>

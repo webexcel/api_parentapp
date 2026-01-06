@@ -1,0 +1,797 @@
+====================================================================================================
+SCHOOLTREE PARENT APP API ENDPOINTS - FILTERED LIST
+Only Parent App Endpoints with Request Payloads
+====================================================================================================
+
+
+📊 SUMMARY
+====================================================================================================
+Total Parent Endpoints: 52
+Total Modules: 20
+
+Modules Overview:
+  📁 Attendance: 1 endpoints
+  📁 Auth: 5 endpoints
+  📁 Auth (Parent): 4 endpoints
+  📁 Dashboard: 4 endpoints
+  📁 Exam Schedule: 1 endpoints
+  📁 Homework: 1 endpoints
+  📁 Report Card: 2 endpoints
+  📁 attendance: 1 endpoints
+  📁 circular: 2 endpoints
+  📁 dashboard: 8 endpoints
+  📁 examSchedule: 1 endpoints
+  📁 homework: 1 endpoints
+  📁 news-events: 1 endpoints
+  📁 parentMessage: 1 endpoints
+  📁 parentmessage: 3 endpoints
+  📁 payments: 8 endpoints
+  📁 personalize: 1 endpoints
+  📁 remarks: 1 endpoints
+  📁 reportCard: 5 endpoints
+  📁 studentProfile: 1 endpoints
+
+====================================================================================================
+
+
+====================================================================================================
+📦 MODULE: ATTENDANCE
+====================================================================================================
+
+[1] Get Attendance
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/attendance/getAttendance
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "{{student_adno}}",
+  "month": "01",
+  "year": "2026"
+}
+
+
+
+====================================================================================================
+📦 MODULE: AUTH
+====================================================================================================
+
+[1] mobileInstallsNew
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  https://appapi.schooltree.in/api/auth/mobileInstallsNew
+
+Request Payload:
+--------------------------------------------------
+{
+  "mobile_no": "9600037999",
+  "platform_type": "Android",
+  "manufacturer_name": "Google Inc.",
+  "manufacturer_model": "Windows NT 10.0",
+  "os_version": "Windows NT 10.0; Win64; x64",
+  "app_version_code": "100",
+  "dbname": "appdemoo"
+}
+
+
+[2] updateParentFirebaseId
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/auth/updateParentFirebaseId
+
+Request Payload:
+--------------------------------------------------
+{
+  "firebase_id": "qwertyuio",
+  "mobile_no": "9600037999",
+  "dbname": "appdemoo"
+}
+
+
+[3] mobileInstallerVerify
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/auth/mobileInstallerVerify
+
+Request Payload:
+--------------------------------------------------
+{
+  "id": "11T.W06E1E",
+  "otp": "0000",
+  "dbname": "appdemoo"
+}
+
+
+[4] getMobStudentDetail
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/auth/getMobStudentDetail
+
+Request Payload:
+--------------------------------------------------
+{
+  "id": "11T.W06E1E"
+}
+
+
+[5] getMobStudentPhoto
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/auth/getMobStudentPhoto
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "9230"
+}
+
+
+
+====================================================================================================
+📦 MODULE: AUTH (PARENT)
+====================================================================================================
+
+[1] Mobile Install (Parent)
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/auth/mobileInstallsNew
+
+Request Payload:
+--------------------------------------------------
+{
+  "mobile_no": "{{parent_mobile}}",
+  "platform_type": "ANDROID",
+  "manufacturer_name": "{{device_manufacturer}}",
+  "manufacturer_model": "{{device_model}}",
+  "os_version": "13",
+  "app_version_code": "1.0.0",
+  "dbname": "{{dbname}}"
+}
+
+
+[2] Verify OTP (Parent)
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/auth/mobileInstallerVerify
+
+Request Payload:
+--------------------------------------------------
+{
+  "id": "{{mobile_install_id}}",
+  "otp": "{{otp}}",
+  "dbname": "{{dbname}}"
+}
+
+
+[3] Get Student Details
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/auth/getMobStudentDetail
+
+Request Payload:
+--------------------------------------------------
+{
+  "id": "{{mobile_install_id}}"
+}
+
+
+[4] Get Student Photo
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/auth/getMobStudentPhoto
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "{{student_adno}}"
+}
+
+
+
+====================================================================================================
+📦 MODULE: DASHBOARD
+====================================================================================================
+
+[1] Get Latest Message
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/dashboard/getLatestMessage
+
+Request Payload:
+--------------------------------------------------
+{
+  "mobile_no": "{{parent_mobile}}"
+}
+
+
+[2] Get Flash Message
+----------------------------------------------------------------------------------------------------
+Method:        GET
+Endpoint URL:  {{base_url}}/dashboard/getFlashMessage
+
+Request Payload: (None)
+
+
+[3] Check Fees Balance
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/dashboard/checkFeesBalance
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "{{student_adno}}"
+}
+
+
+[4] Forgot Password
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/dashboard/forgotPassword
+
+Request Payload:
+--------------------------------------------------
+{
+  "mobile_no": "{{parent_mobile}}"
+}
+
+
+
+====================================================================================================
+📦 MODULE: EXAM SCHEDULE
+====================================================================================================
+
+[1] Get Parent Exam Schedule
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/examSchedule/getParentExamSchedule
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "{{student_adno}}"
+}
+
+
+
+====================================================================================================
+📦 MODULE: HOMEWORK
+====================================================================================================
+
+[1] Get Homework By Class
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/homework/getSaveHomeworkByClass
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "{{student_adno}}"
+}
+
+
+
+====================================================================================================
+📦 MODULE: REPORT CARD
+====================================================================================================
+
+[1] Get Annual Report Card
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/reportCard/getAnnualReportcard
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "{{student_adno}}"
+}
+
+
+[2] Get Term Report Card
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  {{base_url}}/reportCard/getTermReportcardAdno
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "{{student_adno}}",
+  "term": "1"
+}
+
+
+
+====================================================================================================
+📦 MODULE: ATTENDANCE
+====================================================================================================
+
+[1] getAttendance
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/attendance/getAttendance
+
+Request Payload:
+--------------------------------------------------
+{
+  "ADNO": "48/2022"
+}
+
+
+
+====================================================================================================
+📦 MODULE: CIRCULAR
+====================================================================================================
+
+[1] getAllMessagesByMobileNumber
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/circular/getAllMessagesByMobileNumber
+
+Request Payload:
+--------------------------------------------------
+{
+  "mobile_number": "9600037999",
+  "page_size": 10,
+  "current_size": 0
+}
+
+
+[2] getBase64
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/circular/getBase64
+
+Request Payload:
+--------------------------------------------------
+{
+  "url": "https://demo.schooltree.in/uploads/appdemoo/Screenshot_20250224_100220_Gmail1740467389.jpg"
+}
+
+
+
+====================================================================================================
+📦 MODULE: DASHBOARD
+====================================================================================================
+
+[1] getLatestMessage
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/dashboard/getLatestMessage
+
+Request Payload:
+--------------------------------------------------
+{
+  "mobile_number": "9600037999"
+}
+
+
+[2] getFlashMessage
+----------------------------------------------------------------------------------------------------
+Method:        GET
+Endpoint URL:  http://localhost:3005/api/dashboard/getFlashMessage
+
+Request Payload: (None)
+
+
+[3] feesFlash
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/dashboard/feesFlash
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "9230"
+}
+
+
+[4] checkFeesBalance
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/dashboard/checkFeesBalance
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": [
+    "9230",
+    "48/2022"
+  ]
+}
+
+
+[5] batchCount
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/dashboard/batchCount
+
+Request Payload:
+--------------------------------------------------
+{
+  "mobile_number": "9600037999"
+}
+
+
+[6] getIdCard
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/dashboard/getIdCard
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "9230"
+}
+
+
+[7] getLatestMessageWebsite
+----------------------------------------------------------------------------------------------------
+Method:        GET
+Endpoint URL:  http://localhost:3005/api/dashboard/getLatestMessageWebsite
+
+Request Payload: (None)
+
+
+[8] forgotPassword
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/dashboard/forgotPassword
+
+Request Payload:
+--------------------------------------------------
+{
+  "mobile_no": "9600037999"
+}
+
+
+
+====================================================================================================
+📦 MODULE: EXAMSCHEDULE
+====================================================================================================
+
+[1] getParentExamSchedule
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/examschedule/getParentExamSchedule
+
+Request Payload:
+--------------------------------------------------
+{
+  "CLASS_ID": "1"
+}
+
+
+
+====================================================================================================
+📦 MODULE: HOMEWORK
+====================================================================================================
+
+[1] getSaveHomeworkByClass
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  https://appapi.schooltree.in/api/homework/getSaveHomeworkByClass
+
+Request Payload:
+--------------------------------------------------
+{
+  "classid": "1",
+  "adno": "48/2022"
+}
+
+
+
+====================================================================================================
+📦 MODULE: NEWS-EVENTS
+====================================================================================================
+
+[1] getMobileEvents
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/newsevents/getMobileEvents
+
+Request Payload:
+--------------------------------------------------
+{
+  "CLASS_ID": "1"
+}
+
+
+
+====================================================================================================
+📦 MODULE: PARENTMESSAGE
+====================================================================================================
+
+[1] getVideoUploads
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/parentMessage/getVideoUploads
+
+Request Payload:
+--------------------------------------------------
+{
+  "classid": "1"
+}
+
+
+
+====================================================================================================
+📦 MODULE: PARENTMESSAGE
+====================================================================================================
+
+[1] saveMessage
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/parentmessage/saveMessage
+
+Request Payload:
+--------------------------------------------------
+{
+  "AdmNo": "9230",
+  "classid": "16",
+  "filename": "",
+  "image": "",
+  "message": "sdfghjk",
+  "name": "AASHIKA A",
+  "thumbnail": "",
+  "type": ""
+}
+
+
+[2] getParentUploadDetails
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/parentmessage/getParentUploadDetails
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "9230"
+}
+
+
+[3] deleteMessage
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/parentmessage/deleteMessage
+
+Request Payload:
+--------------------------------------------------
+{
+  "id": 4
+}
+
+
+
+====================================================================================================
+📦 MODULE: PAYMENTS
+====================================================================================================
+
+[1] getPayEnable
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/payments/getPayEnable
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "9240"
+}
+
+
+[2] getFeeInstallment
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/payments/getFeeInstallment
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "9240"
+}
+
+
+[3] getStudentPayHistory
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/payments/getStudentPayHistory
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "7824",
+  "CLASS_ID": "22"
+}
+
+
+[4] getPrintBill
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/payments/getPrintBill
+
+Request Payload:
+--------------------------------------------------
+{
+  "rid": "1",
+  "payment_id": "1",
+  "adno": "9617",
+  "name": "AASHIKA S",
+  "className": "V-A"
+}
+
+
+[5] payOnline
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/payments/payOnline
+
+Request Payload:
+--------------------------------------------------
+{
+  "admission_id": "9",
+  "payment_amount": "1.00",
+  "mobile_no": "9600037999",
+  "token": ""
+}
+
+
+[6] updateOrderId
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/payments/updateOrderId
+
+Request Payload:
+--------------------------------------------------
+{
+  "token": "",
+  "amount": "1.00",
+  "FEE_DETAILS": "",
+  "id": 1
+}
+
+
+[7] checkFeesDefaulter
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/payments/checkFeesDefaulter
+
+Request Payload:
+--------------------------------------------------
+{
+  "yearid": "5",
+  "adno": "10210"
+}
+
+
+[8] getMobFeesStudentDetail
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/payments/getMobFeesStudentDetail
+
+Request Payload:
+--------------------------------------------------
+{
+  "yearid": "5",
+  "adno": "10210"
+}
+
+
+
+====================================================================================================
+📦 MODULE: PERSONALIZE
+====================================================================================================
+
+[1] getPersonalMessageList
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/personalize/getPersonalMessageList
+
+Request Payload:
+--------------------------------------------------
+{
+  "type": "PERSONALIZE",
+  "staff_id": "1",
+  "classid": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+  "Is_Admin": "Y"
+}
+
+
+
+====================================================================================================
+📦 MODULE: REMARKS
+====================================================================================================
+
+[1] getStudentRemarks
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/remarks/getStudentRemarks
+
+Request Payload:
+--------------------------------------------------
+{
+  "staff_id": 1
+}
+
+
+
+====================================================================================================
+📦 MODULE: REPORTCARD
+====================================================================================================
+
+[1] getMarksOnAdno
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/reportcard/getMarksOnAdno
+
+Request Payload:
+--------------------------------------------------
+{
+  "ADNO": "AD1"
+}
+
+
+[2] getAnnualReportcard
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/reportCard/getAnnualReportcard
+
+Request Payload:
+--------------------------------------------------
+{
+  "adno": "10210"
+}
+
+
+[3] getTermType
+----------------------------------------------------------------------------------------------------
+Method:        GET
+Endpoint URL:  http://localhost:3005/api/reportCard/getTermType
+
+Request Payload: (None)
+
+
+[4] getTermReportcardAdno
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/reportCard/getTermReportcardAdno
+
+Request Payload:
+--------------------------------------------------
+{
+  "ADNO": "10210",
+  "CLASSID": "1",
+  "EXGRPID": "1",
+  "YEARID": "5",
+  "TERMTYPE": "term1"
+}
+
+
+[5] selectExamName
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/reportCard/selectExamName
+
+Request Payload:
+--------------------------------------------------
+{
+  "class_Id": "1"
+}
+
+
+
+====================================================================================================
+📦 MODULE: STUDENTPROFILE
+====================================================================================================
+
+[1] getStudentPayDetails
+----------------------------------------------------------------------------------------------------
+Method:        POST
+Endpoint URL:  http://localhost:3005/api/studentProfile/getStudentPayDetails
+
+Request Payload:
+--------------------------------------------------
+{
+  "yearid": "5",
+  "adno": "10210"
+}
+

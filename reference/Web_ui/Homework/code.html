@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alpha Portal - Homework</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563EB", 
+                        "primary-light": "#EFF6FF",
+                        "primary-dark": "#1E40AF",
+                        "background-light": "#F3F4F6", 
+                        "background-dark": "#111827", 
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1F2937",
+                        "text-light": "#1F2937",
+                        "text-dark": "#F9FAFB",
+                        "secondary-text-light": "#6B7280",
+                        "secondary-text-dark": "#9CA3AF",
+                        "border-light": "#E5E7EB",
+                        "border-dark": "#374151",
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'xl': "1rem",
+                        '2xl': "1.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans antialiased transition-colors duration-200">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex-shrink-0 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark flex flex-col transition-colors duration-200">
+<div class="h-16 flex items-center px-6 border-b border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">school</span>
+</div>
+<span class="font-bold text-lg text-text-light dark:text-text-dark">Alpha Portal</span>
+</div>
+</div>
+<div class="px-4 pt-6 pb-2 flex flex-col gap-2">
+<div class="flex items-center gap-3 p-2 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 relative w-full text-left ring-1 ring-blue-100 dark:ring-blue-900">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-r-full"></div>
+<img alt="Pranav" class="w-9 h-9 rounded-full object-cover border-2 border-white dark:border-gray-700 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxgcMdiJsn9rx_Nb4iczRKElBg4hVP4vQoLDmGE-qvcspu4rmQ70DfgYZmkTBvrJh0stzXFYGJLWw1yOBHn9M0n2OBJBEh-RdLWpUXeWF3PNB5AMIvsj0TZAagS84QWt-lrB2SvqNHX-NgG6NEwH859Ohrc7pq0Hwryyx7FOZJ6y6uPx_9oj9flHMzmeUlB1ZbWBfDTuC0NeT44M4Q8iKbFEuc-J1FcdUSOeZbGzZzeWKD5P5hNia6LD6i-8fuo6yVUWbosjpI5gN7"/>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-text-light dark:text-text-dark leading-tight">Pranav OG</span>
+<span class="text-[11px] text-primary font-medium">Class IV-C</span>
+</div>
+<span class="material-symbols-outlined text-primary ml-auto text-lg">check_circle</span>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-xl border border-transparent w-full text-left opacity-70">
+<div class="w-9 h-9 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 dark:text-purple-300 font-bold text-sm border-2 border-white dark:border-gray-700 shadow-sm">
+                        AV
+                    </div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-text-light dark:text-text-dark leading-tight">Arivumathi V</span>
+<span class="text-[11px] text-secondary-text-light dark:text-secondary-text-dark">Class I-A</span>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 mt-2 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 bg-primary text-white rounded-lg shadow-sm" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-medium">Homework</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">campaign</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Circulars</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">school</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Academics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">payments</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Fee Payment</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">directions_bus</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Transport</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">event</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Events</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">settings</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-light dark:border-border-dark">
+<a class="flex items-center gap-3 px-3 py-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors justify-center" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-medium">Sign Out</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden relative">
+<header class="h-16 bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark flex items-center justify-between px-8 flex-shrink-0 transition-colors duration-200">
+<h1 class="text-xl font-bold text-text-light dark:text-text-dark">Homework Assignments</h1>
+<div class="flex items-center gap-6">
+<button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="relative text-secondary-text-light dark:text-secondary-text-dark hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 pl-6 border-l border-border-light dark:border-border-dark">
+<img alt="Profile" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxgcMdiJsn9rx_Nb4iczRKElBg4hVP4vQoLDmGE-qvcspu4rmQ70DfgYZmkTBvrJh0stzXFYGJLWw1yOBHn9M0n2OBJBEh-RdLWpUXeWF3PNB5AMIvsj0TZAagS84QWt-lrB2SvqNHX-NgG6NEwH859Ohrc7pq0Hwryyx7FOZJ6y6uPx_9oj9flHMzmeUlB1ZbWBfDTuC0NeT44M4Q8iKbFEuc-J1FcdUSOeZbGzZzeWKD5P5hNia6LD6i-8fuo6yVUWbosjpI5gN7"/>
+<span class="material-symbols-outlined text-secondary-text-light dark:text-secondary-text-dark text-sm">expand_more</span>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 bg-background-light dark:bg-background-dark">
+<div class="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between">
+<div class="relative w-full md:w-96">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-text-light dark:text-secondary-text-dark material-symbols-outlined">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-secondary-text-light dark:placeholder-secondary-text-dark" placeholder="Search subject or topic..." type="text"/>
+</div>
+<div class="flex gap-3 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white font-semibold text-sm rounded-lg shadow-md shadow-blue-500/20 whitespace-nowrap transition-all">
+<img alt="Pranav" class="w-6 h-6 rounded-full border border-white/20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxgcMdiJsn9rx_Nb4iczRKElBg4hVP4vQoLDmGE-qvcspu4rmQ70DfgYZmkTBvrJh0stzXFYGJLWw1yOBHn9M0n2OBJBEh-RdLWpUXeWF3PNB5AMIvsj0TZAagS84QWt-lrB2SvqNHX-NgG6NEwH859Ohrc7pq0Hwryyx7FOZJ6y6uPx_9oj9flHMzmeUlB1ZbWBfDTuC0NeT44M4Q8iKbFEuc-J1FcdUSOeZbGzZzeWKD5P5hNia6LD6i-8fuo6yVUWbosjpI5gN7"/>
+<span>Pranav OG</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-light dark:bg-surface-dark text-secondary-text-light dark:text-secondary-text-dark hover:text-text-light dark:hover:text-text-dark font-medium text-sm rounded-lg border border-border-light dark:border-border-dark whitespace-nowrap transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
+<div class="w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 dark:text-purple-300 font-bold text-[10px]">
+            AV
+        </div>
+<span>Arivumathi V</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-5 shadow-sm border border-border-light dark:border-border-dark hover:shadow-md transition-all group flex flex-col md:flex-row items-start md:items-center gap-5">
+<div class="flex-shrink-0">
+<div class="w-14 h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+<span class="material-symbols-outlined text-2xl">calculate</span>
+</div>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">Math</span>
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark">• Mr. Anderson</span>
+</div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark truncate">Algebra Basics - Worksheet 4</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark truncate">Complete problems 1-20 on page 42.</p>
+</div>
+<div class="flex flex-col items-end gap-2 w-full md:w-auto mt-2 md:mt-0 flex-shrink-0">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800 whitespace-nowrap">
+<span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                Due Tomorrow
+            </span>
+<a class="text-sm font-semibold text-primary hover:text-primary-dark transition-colors" href="#">View Details</a>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-5 shadow-sm border border-border-light dark:border-border-dark hover:shadow-md transition-all group flex flex-col md:flex-row items-start md:items-center gap-5">
+<div class="flex-shrink-0">
+<div class="w-14 h-14 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-2xl">science</span>
+</div>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">Science</span>
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark">• Mrs. Frizzle</span>
+</div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark truncate">Volcano Project</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark truncate">Build a working model volcano and submit video.</p>
+</div>
+<div class="flex flex-col items-end gap-2 w-full md:w-auto mt-2 md:mt-0 flex-shrink-0">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800 whitespace-nowrap">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                Due Oct 15
+            </span>
+<a class="text-sm font-semibold text-primary hover:text-primary-dark transition-colors" href="#">View Details</a>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-5 shadow-sm border-l-4 border-l-red-500 border-y border-r border-border-light dark:border-border-dark hover:shadow-md transition-all group flex flex-col md:flex-row items-start md:items-center gap-5 relative overflow-hidden">
+<div class="flex-shrink-0">
+<div class="w-14 h-14 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined text-2xl">menu_book</span>
+</div>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">English</span>
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark">• Mr. Keating</span>
+</div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark truncate">Reading Log - Chapter 3</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark truncate">Submit summary of Chapter 3 from 'The Giver'.</p>
+</div>
+<div class="flex flex-col items-end gap-2 w-full md:w-auto mt-2 md:mt-0 flex-shrink-0">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800 whitespace-nowrap">
+<span class="material-symbols-outlined text-sm">error</span>
+                Overdue: Yesterday
+            </span>
+<a class="text-sm font-semibold text-primary hover:text-primary-dark transition-colors" href="#">Submit Late</a>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-5 shadow-sm border border-border-light dark:border-border-dark hover:shadow-md transition-all group flex flex-col md:flex-row items-start md:items-center gap-5">
+<div class="flex-shrink-0">
+<div class="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400">
+<span class="material-symbols-outlined text-2xl">palette</span>
+</div>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">Art</span>
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark">• Ms. Kahlo</span>
+</div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark truncate">Color Theory Quiz</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark truncate">Online quiz about primary and secondary colors.</p>
+</div>
+<div class="flex flex-col items-end gap-2 w-full md:w-auto mt-2 md:mt-0 flex-shrink-0">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800 whitespace-nowrap">
+<span class="material-symbols-outlined text-sm">check</span>
+                Submitted
+            </span>
+<a class="text-sm font-semibold text-secondary-text-light dark:text-secondary-text-dark hover:text-text-light transition-colors" href="#">Review</a>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-5 shadow-sm border border-border-light dark:border-border-dark hover:shadow-md transition-all group flex flex-col md:flex-row items-start md:items-center gap-5">
+<div class="flex-shrink-0">
+<div class="w-14 h-14 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined text-2xl">history_edu</span>
+</div>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">Social Studies</span>
+<span class="text-xs text-secondary-text-light dark:text-secondary-text-dark">• Mrs. Thompson</span>
+</div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark truncate">Indus Valley Map Work</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark truncate">Mark the major sites of the Indus Valley Civilization.</p>
+</div>
+<div class="flex flex-col items-end gap-2 w-full md:w-auto mt-2 md:mt-0 flex-shrink-0">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800 whitespace-nowrap">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                Due Oct 28
+            </span>
+<a class="text-sm font-semibold text-primary hover:text-primary-dark transition-colors" href="#">View Details</a>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-center pb-8">
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark">Showing 5 of 12 assignments</p>
+</div>
+</div>
+</main>
+</div>
+<script>
+    // Simple script to toggle dark mode based on system preference initially
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+    }
+</script>
+</body></html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alpha Portal - Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563EB", 
+                        "primary-light": "#EFF6FF",
+                        "primary-dark": "#1E40AF",
+                        "background-light": "#F3F4F6", 
+                        "background-dark": "#111827", 
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1F2937",
+                        "text-light": "#1F2937",
+                        "text-dark": "#F9FAFB",
+                        "secondary-text-light": "#6B7280",
+                        "secondary-text-dark": "#9CA3AF",
+                        "border-light": "#E5E7EB",
+                        "border-dark": "#374151",
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'xl': "1rem",
+                        '2xl': "1.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans antialiased transition-colors duration-200">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex-shrink-0 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark flex flex-col transition-colors duration-200">
+<div class="h-16 flex items-center px-6 border-b border-border-light dark:border-border-dark flex-shrink-0">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-primary">
+<span class="material-icons-outlined text-xl">school</span>
+</div>
+<span class="font-bold text-lg text-text-light dark:text-text-dark">Alpha Portal</span>
+</div>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+<div class="mb-6 space-y-3">
+<div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-xl border border-blue-100 dark:border-blue-800 flex items-center gap-3 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-xl"></div>
+<img alt="Pranav OG" class="w-10 h-10 rounded-full object-cover border-2 border-white dark:border-gray-700 shadow-sm flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyT-7ovY-g-TxZ6AKzZF45kEEuK1e8Raqe1JUaUKM4H3sZ6Re4QQqW8clsN-4tO2Ikd5yuhx6Qo85O49GXNvlTBidd_bl9kg-Lc5-jpq_Fxck4U7pmuitOGFzlr_78QeXxDalkM4Jds2huLUR4wKzedubx00HzUbg_wM47wCQEYZ97g4Wr3rtARJAlCx5MYdLCVocs7Qlmu8YjE8zQoct1sb1vLx1UhrgnMVlu1jVOJVh57CJJs7nhCSCg47wQ8aBTfuZh3nwyJEhr"/>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-sm text-text-light dark:text-text-dark truncate">Pranav OG</h3>
+<p class="text-xs font-medium text-primary truncate">Class IV-C</p>
+</div>
+<span class="material-icons-outlined text-primary text-lg">check_circle</span>
+</div>
+<div class="p-3 rounded-xl flex items-center gap-3 opacity-70">
+<div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-300 font-bold text-sm flex-shrink-0">
+            AV
+        </div>
+<div class="flex-1 min-w-0">
+<h3 class="font-medium text-sm text-text-light dark:text-text-dark truncate">Arivumathi V</h3>
+<p class="text-xs text-secondary-text-light dark:text-secondary-text-dark truncate">Class I-A</p>
+</div>
+</div>
+</div>
+<div class="h-px bg-border-light dark:bg-border-dark my-4 mx-2"></div>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">dashboard</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 bg-primary text-white rounded-lg shadow-sm" href="#">
+<span class="material-icons-outlined">photo_library</span>
+<span class="font-medium">Gallery</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">assignment</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Homework</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">campaign</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Circulars</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">school</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Academics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">payments</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Fee Payment</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">directions_bus</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Transport</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">event</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Events</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined group-hover:text-primary">settings</span>
+<span class="font-medium group-hover:text-text-light dark:group-hover:text-text-dark">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-light dark:border-border-dark">
+<a class="flex items-center gap-3 px-3 py-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors justify-center" href="#">
+<span class="material-icons-outlined">logout</span>
+<span class="font-medium">Sign Out</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-hidden relative">
+<header class="h-16 bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark flex items-center justify-between px-8 flex-shrink-0 transition-colors duration-200">
+<h1 class="text-xl font-bold text-text-light dark:text-text-dark">School Gallery</h1>
+<div class="flex items-center gap-6">
+<button class="text-secondary-text-light dark:text-secondary-text-dark hover:text-primary transition-colors">
+<span class="material-icons-outlined">search</span>
+</button>
+<button class="relative text-secondary-text-light dark:text-secondary-text-dark hover:text-primary transition-colors">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 pl-6 border-l border-border-light dark:border-border-dark">
+<img alt="Profile" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxgcMdiJsn9rx_Nb4iczRKElBg4hVP4vQoLDmGE-qvcspu4rmQ70DfgYZmkTBvrJh0stzXFYGJLWw1yOBHn9M0n2OBJBEh-RdLWpUXeWF3PNB5AMIvsj0TZAagS84QWt-lrB2SvqNHX-NgG6NEwH859Ohrc7pq0Hwryyx7FOZJ6y6uPx_9oj9flHMzmeUlB1ZbWBfDTuC0NeT44M4Q8iKbFEuc-J1FcdUSOeZbGzZzeWKD5P5hNia6LD6i-8fuo6yVUWbosjpI5gN7"/>
+<span class="material-icons-outlined text-secondary-text-light dark:text-secondary-text-dark text-sm">expand_more</span>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 bg-background-light dark:bg-background-dark">
+<div class="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between">
+<div class="relative w-full md:w-96">
+<span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-text-light dark:text-secondary-text-dark material-icons-outlined">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-secondary-text-light dark:placeholder-secondary-text-dark" placeholder="Search albums..." type="text"/>
+</div>
+<div class="flex gap-3">
+<div class="hidden md:flex items-center text-sm text-secondary-text-light dark:text-secondary-text-dark">
+<span class="mr-2">Sort by:</span>
+<select class="bg-transparent border-none font-semibold text-text-light dark:text-text-dark focus:ring-0 p-0 cursor-pointer">
+<option>Newest First</option>
+<option>Oldest First</option>
+<option>Name A-Z</option>
+</select>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="group relative bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-border-light dark:border-border-dark cursor-pointer flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+<img alt="Independence Day" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHn0FHaNAK0r9Ottad5fnUsdUnkVs3C43bufERan_CylmcZLvX46VNFwQt98I78tAmfCjWtijJJw6tPF3macfUT4rR_7OgkCczEADFUi4lRKi2MNff3k5lPgvtA_AeQyA39HNlr11hNLqK15zg8GEpfxh89f0lmH1axWF0Nw7ivFrjuURUjivWmhzBcsIKfMxt23iRgU0w5SXll6nLGRE1yh7QPTWWC5lAssixnt-r8BXZ2LS-q5W19sHf_PUARZna26clFmrgmx4s"/>
+<div class="absolute bottom-3 right-3 z-20 bg-black/50 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-icons-outlined text-xs">photo_camera</span>
+<span>24</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark mb-1 group-hover:text-primary transition-colors">Independence Day 2023</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark line-clamp-2">Highlights from the flag hoisting ceremony and cultural performances by Grade 4 and 5.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-border-light dark:border-border-dark flex items-center justify-between text-xs text-secondary-text-light dark:text-secondary-text-dark font-medium">
+<div class="flex items-center gap-1">
+<span class="material-icons-outlined text-sm">calendar_today</span>
+<span>Aug 15, 2023</span>
+</div>
+<span class="text-primary hover:underline">View Album</span>
+</div>
+</div>
+</div>
+<div class="group relative bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-border-light dark:border-border-dark cursor-pointer flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+<img alt="Science Fair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbLMA_SsoAnoJNkBxD8r2f9v93cxqCyTwJMF_PbmjD9T68dsTg0E--jhyza1poXnLadbXUTfEnf2DMAg3fm9Cygzf9lJtSBeMFFvLDRsjTiiSz_QSMlOAGvYuUUiUoiDWzwy5u-XNrW956zpcgnCMXA5DN5fIcINqoLIGSJx-6QpQUgJkH-dto-xGxVeS0tUGlPEUpmljjIhzLnWSXKnXUzx9UsCG1KVJFwvcy49NuCO9m7YW3N5wFHO0f3ct2lJXO6MVtsKSxEFL6"/>
+<div class="absolute bottom-3 right-3 z-20 bg-black/50 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-icons-outlined text-xs">photo_camera</span>
+<span>48</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark mb-1 group-hover:text-primary transition-colors">Annual Science Exhibition</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark line-clamp-2">Innovative projects and models displayed by our young scientists from all grades.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-border-light dark:border-border-dark flex items-center justify-between text-xs text-secondary-text-light dark:text-secondary-text-dark font-medium">
+<div class="flex items-center gap-1">
+<span class="material-icons-outlined text-sm">calendar_today</span>
+<span>Oct 10, 2023</span>
+</div>
+<span class="text-primary hover:underline">View Album</span>
+</div>
+</div>
+</div>
+<div class="group relative bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-border-light dark:border-border-dark cursor-pointer flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+<img alt="Art Workshop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGXZQZoBfJ5BsC4I027FNfs9ZAAhij0q3ShJ6ODgUWDngxYcNawT7rD-vgb2FvEtfzSb96FoS3gHajfnH0cfiKnrRiZZCHN2Kwg0WPW5HORm4waU2iv8Y7yEgfZp5478rEqXPn1GCIT1eoMeku9lk3xwWKm06PR-WHjL1G7KtKyJtaZrK_jrgXcnp70XWwnZgOh5JN4jSgBPBq9nL5h1nzt2KAYDlPSjZxU-ciVwEK5adNQ7JBouDkT7xM4mLx_njhwxpV6uRmJCK8"/>
+<div class="absolute bottom-3 right-3 z-20 bg-black/50 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-icons-outlined text-xs">photo_camera</span>
+<span>15</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark mb-1 group-hover:text-primary transition-colors">Creative Arts Workshop</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark line-clamp-2">A weekend of colors and creativity where students learned pottery and canvas painting.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-border-light dark:border-border-dark flex items-center justify-between text-xs text-secondary-text-light dark:text-secondary-text-dark font-medium">
+<div class="flex items-center gap-1">
+<span class="material-icons-outlined text-sm">calendar_today</span>
+<span>Nov 05, 2023</span>
+</div>
+<span class="text-primary hover:underline">View Album</span>
+</div>
+</div>
+</div>
+<div class="group relative bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-border-light dark:border-border-dark cursor-pointer flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+<img alt="Sports Day" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoDj9md0y-XIFONUokYvnUxTZT2hFlmWRJigUpvKwa7D9qw8UC9bB8DNRG6RApO6X-woKMcsqnexxudVF3yfl0gvBYg2ODvlWSiN9AXakImb89boVgPjJHROrSY3ESELMGVJaj1A3KWsVVMTXoaVFhtVOToEzypWfR73lkezNVv5b1BInw8IXR_2DTqdw-U0nRDoI1_E-D6z2_gwimmOiU4Cb_fGGJD6rNxB4zJ1SzaO3uFheRKtZizy1h2iJTxUz9EfrtJ1GuR5xv"/>
+<div class="absolute bottom-3 right-3 z-20 bg-black/50 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-icons-outlined text-xs">photo_camera</span>
+<span>112</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark mb-1 group-hover:text-primary transition-colors">Annual Sports Meet</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark line-clamp-2">Track and field events, relay races, and the grand march past.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-border-light dark:border-border-dark flex items-center justify-between text-xs text-secondary-text-light dark:text-secondary-text-dark font-medium">
+<div class="flex items-center gap-1">
+<span class="material-icons-outlined text-sm">calendar_today</span>
+<span>Dec 12, 2023</span>
+</div>
+<span class="text-primary hover:underline">View Album</span>
+</div>
+</div>
+</div>
+<div class="group relative bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-border-light dark:border-border-dark cursor-pointer flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+<img alt="Graduation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk7ZXnMdxzGZR71JLWIB_7x8nk9YnCo1-wrYMQrAv3JFxxhxQ92B8M6PJrTD6HR6lVx2H8iIFquSjhRHjWne3I57-ajN_yzVTHasT4npYeDourYhO8hWNF1zAnhCF9NTeAmTSGudJq4yXj0LbKpcBi_Wjw3Qn6HEs3QsACwIJg9GcxAL7ufinYCWnLXk9aziTmH-sxG31mHTUcKdsLPZdxekmXxCIVSrpqAWKrPJ-dV_A59g5cLcKyd-RfzKn4nPHpBgNfnYDczOhM"/>
+<div class="absolute bottom-3 right-3 z-20 bg-black/50 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-icons-outlined text-xs">photo_camera</span>
+<span>64</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark mb-1 group-hover:text-primary transition-colors">Kindergarten Graduation</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark line-clamp-2">Celebrating our little graduates as they move to primary school.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-border-light dark:border-border-dark flex items-center justify-between text-xs text-secondary-text-light dark:text-secondary-text-dark font-medium">
+<div class="flex items-center gap-1">
+<span class="material-icons-outlined text-sm">calendar_today</span>
+<span>Mar 20, 2024</span>
+</div>
+<span class="text-primary hover:underline">View Album</span>
+</div>
+</div>
+</div>
+<div class="group relative bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-border-light dark:border-border-dark cursor-pointer flex flex-col h-full">
+<div class="h-56 overflow-hidden relative">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+<img alt="Field Trip" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpc6YuUwZDBNRKXW3fBIAY_NGqxNz_IHeLozmgKXdRGPkq0qVj-3Taflr-MrIGzI7ev960k3n4gbe-ShVi2IKHRbxOIkwaV0syznIYpxPvpg_5ij9cLvLIQL8eCMLb77WG643nIpnWuB4yYfXtVLZR_WBLpRb7XBr2Rs0C6OO0obxbtQ5dVPFqsrirKgkCdD1HFISEco3xGnDTJUiSLi5YWEMgVlxxhSURSlVcGC-Xilz8QfCC32utnz7KJCE4vEbUviILz_nlMfdE"/>
+<div class="absolute bottom-3 right-3 z-20 bg-black/50 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-icons-outlined text-xs">photo_camera</span>
+<span>35</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark mb-1 group-hover:text-primary transition-colors">Field Trip to the Zoo</h3>
+<p class="text-sm text-secondary-text-light dark:text-secondary-text-dark line-clamp-2">A fun educational day out exploring wildlife and nature conservation.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-border-light dark:border-border-dark flex items-center justify-between text-xs text-secondary-text-light dark:text-secondary-text-dark font-medium">
+<div class="flex items-center gap-1">
+<span class="material-icons-outlined text-sm">calendar_today</span>
+<span>Apr 15, 2024</span>
+</div>
+<span class="text-primary hover:underline">View Album</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-center pb-8">
+<button class="px-6 py-2 border border-border-light dark:border-border-dark rounded-lg text-sm font-medium text-secondary-text-light dark:text-secondary-text-dark hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                    Load More Albums
+                </button>
+</div>
+</div>
+</main>
+</div>
+<script>
+    // Simple script to toggle dark mode based on system preference initially
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+    }
+</script>
+</body></html>
