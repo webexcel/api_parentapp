@@ -28,13 +28,7 @@ api.interceptors.request.use(
       };
     }
 
-    // Auto-inject dbname for GET requests
-    if (config.method === 'get') {
-      config.params = {
-        ...config.params,
-        dbname: DB_NAME,
-      };
-    }
+    // Note: dbname is included in the token, no need to add to GET params
 
     return config;
   },

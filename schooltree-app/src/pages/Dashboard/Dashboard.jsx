@@ -1,10 +1,13 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { Card } from '../../components/common';
+import { Card, Loader } from '../../components/common';
 import { ROUTES } from '../../utils/constants';
+import { fetchDashboardData, getFlashMessage } from '../../services/dashboardService';
+import FlashMessageModal from '../../components/FlashMessageModal';
 
 // Stat Card Component
-function StatCard({ title, value, subtitle, icon, iconBg, iconColor }) {
+function StatCard({ title, value, subtitle, icon, iconBg, loading }) {
   return (
     <Card className="p-5 flex flex-col gap-1">
       <div className="flex items-center justify-between mb-2">
@@ -13,7 +16,11 @@ function StatCard({ title, value, subtitle, icon, iconBg, iconColor }) {
           {icon}
         </span>
       </div>
-      <p className="text-slate-900 text-2xl font-bold">{value}</p>
+      {loading ? (
+        <div className="h-8 w-20 bg-slate-200 animate-pulse rounded"></div>
+      ) : (
+        <p className="text-slate-900 text-2xl font-bold">{value}</p>
+      )}
       {subtitle && (
         <p className="text-xs text-slate-400 mt-1">{subtitle}</p>
       )}
@@ -43,7 +50,7 @@ function ActivityItem({ icon, iconBg, iconColor, title, description, time, forSt
 }
 
 // Quick Action Card Component
-function QuickActionCard({ icon, label, to, bgImage }) {
+function QuickActionCard({ icon, label, to }) {
   return (
     <Link
       to={to}
@@ -52,9 +59,7 @@ function QuickActionCard({ icon, label, to, bgImage }) {
       <div
         className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/10 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
         style={{
-          backgroundImage: bgImage
-            ? `linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 100%), url("${bgImage}")`
-            : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+          backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
         }}
       />
       <div className="absolute bottom-0 left-0 p-3 w-full">
@@ -67,13 +72,107 @@ function QuickActionCard({ icon, label, to, bgImage }) {
 
 function Dashboard() {
   const { user, selectedStudent, students } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [dashboardData, setDashboardData] = useState({
+    attendance: null,
+    feesBalance: null,
+    homework: null,
+    latestMessages: null,
+    batchCount: null,
+  });
 
-  // Mock data - will be replaced with API calls
+  // Flash message modal state
+  const [showFlashModal, setShowFlashModal] = useState(false);
+  const [flashMessage, setFlashMessage] = useState(null);
+
+  // Fetch flash message on mount
+  useEffect(() => {
+    const loadFlashMessage = async () => {
+      try {
+        const result = await getFlashMessage();
+        if (result.success && result.data) {
+          const messageData = result.data?.data || result.data;
+          // Check if there's a valid flash message
+          if (messageData && (messageData.message || messageData.MESSAGE || messageData.title || messageData.TITLE)) {
+            setFlashMessage(messageData);
+            setShowFlashModal(true);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching flash message:', error);
+      }
+    };
+
+    loadFlashMessage();
+  }, []);
+
+  // Fetch dashboard data when component mounts or student changes
+  useEffect(() => {
+    const loadDashboardData = async () => {
+      if (!selectedStudent) return;
+
+      setLoading(true);
+      try {
+        const mobileNumber = user?.mobile_no || user?.contact;
+        const data = await fetchDashboardData(selectedStudent, mobileNumber);
+        setDashboardData(data);
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDashboardData();
+  }, [selectedStudent, user]);
+
+  // Get student name and class from selectedStudent
+  const studentName = selectedStudent?.NAME || selectedStudent?.SNAME || selectedStudent?.name || 'Student';
+  const studentClass = selectedStudent?.CLASSSEC || selectedStudent?.class || '';
+
+  // Calculate attendance percentage
+  const getAttendanceValue = () => {
+    const attendanceData = dashboardData.attendance?.data?.data || dashboardData.attendance?.data;
+    if (attendanceData?.percentage) return `${attendanceData.percentage}%`;
+    if (attendanceData?.present && attendanceData?.total) {
+      return `${Math.round((attendanceData.present / attendanceData.total) * 100)}%`;
+    }
+    return '--';
+  };
+
+  // Get pending homework count
+  const getHomeworkValue = () => {
+    const homeworkData = dashboardData.homework?.data?.data || dashboardData.homework?.data;
+    if (Array.isArray(homeworkData)) {
+      const pending = homeworkData.filter(h => !h.completed && !h.submitted).length;
+      return pending > 0 ? `${pending} Pending` : 'All Done';
+    }
+    return '--';
+  };
+
+  // Get fees balance
+  const getFeesValue = () => {
+    const feesData = dashboardData.feesBalance?.data?.data || dashboardData.feesBalance?.data;
+    if (feesData?.balance || feesData?.total_balance) {
+      const balance = feesData.balance || feesData.total_balance;
+      return balance > 0 ? `₹${balance.toLocaleString()}` : 'Paid';
+    }
+    return '--';
+  };
+
+  // Get circular count
+  const getCircularValue = () => {
+    const batchData = dashboardData.batchCount?.data?.data || dashboardData.batchCount?.data;
+    if (batchData?.count !== undefined) return `${batchData.count} New`;
+    if (batchData?.unread !== undefined) return `${batchData.unread} New`;
+    return '--';
+  };
+
   const stats = [
     {
       title: 'Attendance',
-      value: '95%',
-      subtitle: students.length > 1 ? 'Both students present today' : 'Present today',
+      value: getAttendanceValue(),
+      subtitle: 'This month',
       icon: (
         <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -83,8 +182,8 @@ function Dashboard() {
     },
     {
       title: 'Homework',
-      value: '1 Pending',
-      subtitle: selectedStudent ? `Mathematics (${selectedStudent.student_name || selectedStudent.name || 'Student'})` : 'Mathematics',
+      value: getHomeworkValue(),
+      subtitle: studentName,
       icon: (
         <svg className="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -93,9 +192,21 @@ function Dashboard() {
       iconBg: 'bg-orange-50',
     },
     {
+      title: 'Fees Due',
+      value: getFeesValue(),
+      subtitle: 'Outstanding balance',
+      icon: (
+        <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+          <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
+        </svg>
+      ),
+      iconBg: 'bg-red-50',
+    },
+    {
       title: 'New Circulars',
-      value: '2 New',
-      subtitle: 'Last updated 2 hours ago',
+      value: getCircularValue(),
+      subtitle: 'Unread messages',
       icon: (
         <svg className="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
           <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
@@ -103,62 +214,74 @@ function Dashboard() {
       ),
       iconBg: 'bg-primary-50',
     },
-    {
-      title: 'Next Holiday',
-      value: 'Friday',
-      subtitle: 'National Holiday',
-      icon: (
-        <svg className="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M6 3a1 1 0 011-1h.01a1 1 0 010 2H7a1 1 0 01-1-1zm2 3a1 1 0 00-2 0v1a2 2 0 00-2 2v1a2 2 0 00-2 2v.683a3.7 3.7 0 011.055.485 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0A3.7 3.7 0 0118 12.683V12a2 2 0 00-2-2V9a2 2 0 00-2-2V6a1 1 0 10-2 0v1h-1V6a1 1 0 10-2 0v1H8V6zm10 8.868a3.704 3.704 0 01-4.055-.036 1.704 1.704 0 00-1.89 0 3.704 3.704 0 01-4.11 0 1.704 1.704 0 00-1.89 0A3.704 3.704 0 012 14.868V17a1 1 0 001 1h14a1 1 0 001-1v-2.132zM9 3a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm3 0a1 1 0 011-1h.01a1 1 0 110 2H13a1 1 0 01-1-1z" clipRule="evenodd" />
-        </svg>
-      ),
-      iconBg: 'bg-purple-50',
-    },
   ];
 
-  const recentActivity = [
-    {
-      icon: (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-          <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
-        </svg>
-      ),
-      iconBg: 'bg-blue-50',
-      iconColor: 'text-primary-600',
-      title: 'English Homework Assigned',
-      description: 'Chapter 4: Reading Comprehension questions.',
-      time: '10:30 AM',
-      forStudent: selectedStudent?.student_name || selectedStudent?.name || 'Pranav OG',
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clipRule="evenodd" />
-        </svg>
-      ),
-      iconBg: 'bg-orange-50',
-      iconColor: 'text-orange-600',
-      title: 'Annual Sports Day Registration',
-      description: 'Registration is now open for all track events.',
-      time: 'Yesterday',
-      forStudent: 'All Students',
-    },
-    {
-      icon: (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-          <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
-        </svg>
-      ),
-      iconBg: 'bg-green-50',
-      iconColor: 'text-green-600',
-      title: 'Term 2 Fees Due Reminder',
-      description: 'Please ensure fees are paid before the 15th.',
-      time: '2 days ago',
-      forStudent: null,
-    },
-  ];
+  // Build recent activity from API data
+  const buildRecentActivity = () => {
+    const activities = [];
+
+    // Add latest messages
+    const messagesData = dashboardData.latestMessages?.data?.data || dashboardData.latestMessages?.data;
+    if (Array.isArray(messagesData)) {
+      messagesData.slice(0, 3).forEach(msg => {
+        activities.push({
+          icon: (
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clipRule="evenodd" />
+            </svg>
+          ),
+          iconBg: 'bg-primary-50',
+          iconColor: 'text-primary-600',
+          title: msg.title || msg.subject || 'Notification',
+          description: msg.message || msg.content || '',
+          time: msg.created_at ? new Date(msg.created_at).toLocaleDateString() : 'Recent',
+          forStudent: msg.student_name || studentName,
+        });
+      });
+    }
+
+    // Add homework items
+    const homeworkData = dashboardData.homework?.data?.data || dashboardData.homework?.data;
+    if (Array.isArray(homeworkData)) {
+      homeworkData.slice(0, 2).forEach(hw => {
+        activities.push({
+          icon: (
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+              <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+            </svg>
+          ),
+          iconBg: 'bg-orange-50',
+          iconColor: 'text-orange-600',
+          title: `${hw.subject || hw.SUBJECT || 'Homework'} Assignment`,
+          description: hw.description || hw.homework || hw.HOMEWORK || '',
+          time: hw.date || hw.DATE || 'Recent',
+          forStudent: studentName,
+        });
+      });
+    }
+
+    // If no activities from API, show default message
+    if (activities.length === 0) {
+      activities.push({
+        icon: (
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+          </svg>
+        ),
+        iconBg: 'bg-slate-50',
+        iconColor: 'text-slate-600',
+        title: 'No recent activity',
+        description: 'Check back later for updates',
+        time: 'Now',
+        forStudent: null,
+      });
+    }
+
+    return activities;
+  };
+
+  const recentActivity = buildRecentActivity();
 
   const quickActions = [
     {
@@ -211,6 +334,19 @@ function Dashboard() {
         </p>
       </div>
 
+      {/* Student Info Card */}
+      <div className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl p-5 text-white shadow-lg">
+        <div className="flex items-center gap-4">
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-2xl font-bold">
+            {studentName.charAt(0)}
+          </div>
+          <div>
+            <h4 className="text-xl font-bold">{studentName}</h4>
+            <p className="text-white/80 text-sm">Class: {studentClass}</p>
+          </div>
+        </div>
+      </div>
+
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, index) => (
@@ -221,6 +357,7 @@ function Dashboard() {
             subtitle={stat.subtitle}
             icon={stat.icon}
             iconBg={stat.iconBg}
+            loading={loading}
           />
         ))}
       </div>
@@ -231,19 +368,25 @@ function Dashboard() {
         <div className="flex-1 flex flex-col gap-6">
           <h4 className="text-lg font-bold text-slate-900">Recent Activity</h4>
           <Card className="overflow-hidden">
-            {recentActivity.map((activity, index) => (
-              <ActivityItem
-                key={index}
-                icon={activity.icon}
-                iconBg={activity.iconBg}
-                iconColor={activity.iconColor}
-                title={activity.title}
-                description={activity.description}
-                time={activity.time}
-                forStudent={activity.forStudent}
-                isLast={index === recentActivity.length - 1}
-              />
-            ))}
+            {loading ? (
+              <div className="p-8 flex justify-center">
+                <Loader size="md" />
+              </div>
+            ) : (
+              recentActivity.map((activity, index) => (
+                <ActivityItem
+                  key={index}
+                  icon={activity.icon}
+                  iconBg={activity.iconBg}
+                  iconColor={activity.iconColor}
+                  title={activity.title}
+                  description={activity.description}
+                  time={activity.time}
+                  forStudent={activity.forStudent}
+                  isLast={index === recentActivity.length - 1}
+                />
+              ))
+            )}
           </Card>
         </div>
 
@@ -291,6 +434,13 @@ function Dashboard() {
           </div>
         </div>
       </div>
+
+      {/* Flash Message Modal */}
+      <FlashMessageModal
+        isOpen={showFlashModal}
+        onClose={() => setShowFlashModal(false)}
+        message={flashMessage}
+      />
     </div>
   );
 }

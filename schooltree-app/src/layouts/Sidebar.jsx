@@ -83,37 +83,44 @@ function Sidebar({ isOpen, onClose }) {
         <div className="p-6 border-b border-slate-100">
           <div className="flex flex-col gap-3">
             {students.length > 0 ? (
-              students.map((student) => (
-                <button
-                  key={student.adno || student.id}
-                  onClick={() => handleStudentSwitch(student)}
-                  className={`
-                    flex gap-3 items-center p-2 rounded-lg transition-colors text-left w-full
-                    ${selectedStudent?.adno === student.adno
-                      ? 'bg-primary-50 ring-2 ring-primary-500'
-                      : 'hover:bg-slate-50'}
-                  `}
-                >
-                  <Avatar
-                    src={student.photo}
-                    name={student.student_name || student.name}
-                    size="md"
-                  />
-                  <div className="flex flex-col min-w-0">
-                    <h1 className="text-slate-900 text-sm font-semibold leading-tight truncate">
-                      {student.student_name || student.name}
-                    </h1>
-                    <p className="text-slate-500 text-xs font-normal leading-tight">
-                      Class {student.class_name || student.class}-{student.section_name || student.section}
-                    </p>
-                  </div>
-                  {selectedStudent?.adno === student.adno && (
-                    <svg className="w-4 h-4 text-primary-600 ml-auto shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
-                </button>
-              ))
+              students.map((student) => {
+                const studentName = student.NAME || student.SNAME || student.student_name || student.name || 'Student';
+                const studentClass = student.CLASSSEC || `${student.class_name || student.class}-${student.section_name || student.section}`;
+                const studentId = student.ADNO || student.ADMISSION_ID || student.adno || student.id;
+                const isSelected = (selectedStudent?.ADNO || selectedStudent?.adno) === studentId;
+
+                return (
+                  <button
+                    key={studentId}
+                    onClick={() => handleStudentSwitch(student)}
+                    className={`
+                      flex gap-3 items-center p-2 rounded-lg transition-colors text-left w-full
+                      ${isSelected
+                        ? 'bg-primary-50 ring-2 ring-primary-500'
+                        : 'hover:bg-slate-50'}
+                    `}
+                  >
+                    <Avatar
+                      src={student.photo}
+                      name={studentName}
+                      size="md"
+                    />
+                    <div className="flex flex-col min-w-0">
+                      <h1 className="text-slate-900 text-sm font-semibold leading-tight truncate">
+                        {studentName}
+                      </h1>
+                      <p className="text-slate-500 text-xs font-normal leading-tight">
+                        Class - {studentClass}
+                      </p>
+                    </div>
+                    {isSelected && (
+                      <svg className="w-4 h-4 text-primary-600 ml-auto shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    )}
+                  </button>
+                );
+              })
             ) : (
               <div className="flex gap-3 items-center">
                 <Avatar name="Student" size="md" />
