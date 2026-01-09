@@ -1,4 +1,5 @@
 import api from './api';
+import { DB_NAME } from '../utils/constants';
 
 // Get latest messages/notifications
 export const getLatestMessage = async (mobile_number) => {
@@ -10,10 +11,24 @@ export const getLatestMessage = async (mobile_number) => {
   }
 };
 
-// Get flash message (announcements)
+// Get flash message (announcements popup)
 export const getFlashMessage = async () => {
   try {
-    const response = await api.get('/dashboard/getFlashMessage');
+    const response = await api.get('/dashboard/getFlashMessage', {
+      params: { dbname: DB_NAME }
+    });
+    return { success: true, data: response };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+// Get latest messages for website (flash message queue)
+export const getLatestMessageWebsite = async () => {
+  try {
+    const response = await api.get('/dashboard/getLatestMessageWebsite', {
+      params: { dbname: DB_NAME }
+    });
     return { success: true, data: response };
   } catch (error) {
     return { success: false, error: error.message };
@@ -41,10 +56,10 @@ export const getFeesFlash = async (adno) => {
   }
 };
 
-// Get batch/circular count
-export const getBatchCount = async (mobile_number) => {
+// Get batch/circular count using ADNO
+export const getBatchCount = async (adno) => {
   try {
-    const response = await api.post('/dashboard/batchCount', { mobile_number });
+    const response = await api.post('/dashboard/batchCount', { ADNO: adno });
     return { success: true, data: response };
   } catch (error) {
     return { success: false, error: error.message };
@@ -109,7 +124,7 @@ export const fetchDashboardData = async (student, mobileNumber) => {
     checkFeesBalance(adno),
     getHomework(classId, adno),
     getLatestMessage(mobileNumber),
-    getBatchCount(mobileNumber),
+    getBatchCount(adno), // Now uses ADNO instead of mobile_number
   ]);
 
   return {
@@ -123,6 +138,7 @@ export const fetchDashboardData = async (student, mobileNumber) => {
 
 export default {
   getLatestMessage,
+  getLatestMessageWebsite,
   getFlashMessage,
   checkFeesBalance,
   getFeesFlash,

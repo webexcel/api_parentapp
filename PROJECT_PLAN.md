@@ -240,7 +240,7 @@ src/
       "manufacturer_model": "Chrome",
       "os_version": "1.0",
       "app_version_code": "1.0.0",
-      "dbname": "appdemoo"
+      "dbname": "cresent"
     }
 
     Response:
@@ -255,7 +255,7 @@ src/
     {
       "id": "11T.W06E1E",
       "otp": "1234",
-      "dbname": "appdemoo"
+      "dbname": "cresent"
     }
 
     Response:
@@ -394,20 +394,76 @@ services/
 | Function | Method | Endpoint |
 |----------|--------|----------|
 | `getLatestMessage(mobile_number)` | POST | `/dashboard/getLatestMessage` |
+| `getLatestMessageWebsite()` | GET | `/dashboard/getLatestMessageWebsite` |
 | `getFlashMessage()` | GET | `/dashboard/getFlashMessage` |
 | `checkFeesBalance(adno)` | POST | `/dashboard/checkFeesBalance` |
+| `getBatchCount(adno)` | POST | `/dashboard/batchCount` |
 | `getAttendance(adno, month, year)` | POST | `/attendance/getAttendance` |
+
+**getBatchCount Response:**
+```json
+{
+    "data": [
+        { "label": "circulars", "count": 0 },
+        { "label": "attendance", "count": "100.00", "status": "No Data" },
+        { "label": "homework", "count": 0 },
+        { "label": "payment_due", "count": 7025, "payment_status": "Payment Due" }
+    ]
+}
+```
+
+**getLatestMessageWebsite Response (Flash Messages Queue):**
+```json
+{
+    "data": [
+        { "nid": 3, "links": "https://...", "Discription": "Message text", "show_flag": "0" }
+    ]
+}
+```
 
 #### homeworkService.js
 | Function | Method | Endpoint |
 |----------|--------|----------|
-| `getHomework(adno)` | POST | `/homework/getSaveHomeworkByClass` |
+| `getHomework(classid, adno)` | POST | `/homework/getSaveHomeworkByClass` |
+
+**getHomework Response:**
+```json
+{
+    "data": [
+        {
+            "MSG_ID": 364,
+            "CLASS": "VI-A",
+            "MESSAGE": "Description text",
+            "MSG_DATE": "2026-01-07T18:30:00.000Z",
+            "subject": "BIOLOGY",
+            "event_image": "[\"url1\",\"url2\"]" // JSON array string OR single URL
+        }
+    ]
+}
+```
+Note: `event_image` can contain audio (.wav, .mp3), images, documents (.xlsx, .pdf, .docx)
 
 #### circularService.js
 | Function | Method | Endpoint |
 |----------|--------|----------|
 | `getCirculars(mobile_number, page_size, current_size)` | POST | `/circular/getAllMessagesByMobileNumber` |
 | `getBase64Image(url)` | POST | `/circular/getBase64` |
+
+**getCirculars Response:**
+```json
+{
+    "data": [
+        {
+            "ADNO": "9230",
+            "SMSdate": "07,Jan-13:53",
+            "STUDENTNAME": "AASHIKA A",
+            "Message": "Circular message text",
+            "event_image": null | "https://..."
+        }
+    ],
+    "total_size": 211
+}
+```
 
 #### feeService.js
 | Function | Method | Endpoint |
@@ -1114,7 +1170,7 @@ Components:
 
 ```env
 VITE_API_BASE_URL=http://localhost:3005/api
-VITE_DB_NAME=appdemoo
+VITE_DB_NAME=cresent
 VITE_APP_VERSION=1.0.0
 ```
 
@@ -1198,3 +1254,32 @@ reference/
 | Services | 8 |
 
 **Ready for implementation upon approval.**
+
+---
+
+## Development Log
+
+### January 8, 2026
+**Focus:** Dashboard Flash Messages, Stats Labels, Homework & Circulars API Integration
+
+#### Tasks Completed
+- [x] Flash Message Queue System - Multiple popups showing one by one
+- [x] Dashboard Stats - Real data from batchCount API
+- [x] Homework Page - Real API integration with media attachments
+- [x] Circulars Page - Real API integration
+
+#### New Components Created
+- `FlashMessageQueue.jsx` - Queue system for flash message modals
+- `MediaSlider.jsx` - Slider for images/audio/documents in homework cards
+
+#### API Endpoints Added
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /dashboard/getLatestMessageWebsite` | Flash messages queue |
+| `POST /dashboard/batchCount` | Stats labels (attendance, homework, circulars, payment) |
+
+#### Files Modified
+- `src/services/dashboardService.js` - Added new API functions
+- `src/pages/Dashboard/Dashboard.jsx` - Flash queue + stats integration
+- `src/pages/Homework/Homework.jsx` - Real API + media slider
+- `src/pages/Circulars/Circulars.jsx` - Real API integration

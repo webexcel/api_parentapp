@@ -4,7 +4,7 @@
 
 // API Configuration
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3005/api';
-export const DB_NAME = import.meta.env.VITE_DB_NAME || 'appdemoo';
+export const DB_NAME = import.meta.env.VITE_DB_NAME || 'cresent';
 export const APP_VERSION = import.meta.env.VITE_APP_VERSION || '1.0.0';
 
 // OTP Configuration
@@ -20,6 +20,7 @@ export const ROUTES = {
   DASHBOARD: '/dashboard',
   HOMEWORK: '/homework',
   CIRCULARS: '/circulars',
+  ATTENDANCE: '/attendance',
   FEES: '/fees',
   FEES_SUCCESS: '/fees/success',
   EXAMS: '/exams',
@@ -33,6 +34,7 @@ export const NAV_ITEMS = [
   { label: 'Dashboard', path: ROUTES.DASHBOARD, icon: 'dashboard' },
   { label: 'Homework', path: ROUTES.HOMEWORK, icon: 'homework' },
   { label: 'Circulars', path: ROUTES.CIRCULARS, icon: 'circulars' },
+  { label: 'Attendance', path: ROUTES.ATTENDANCE, icon: 'attendance' },
   { label: 'Academics', path: ROUTES.MARKS, icon: 'academics' },
   { label: 'Fee Payment', path: ROUTES.FEES, icon: 'fees' },
   { label: 'Exam Schedule', path: ROUTES.EXAMS, icon: 'exams' },

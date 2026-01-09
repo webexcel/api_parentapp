@@ -1,5 +1,38 @@
-import { useState } from 'react';
-import { Card, SearchBar, Badge, AudioPlayer } from '../../components/common';
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../hooks/useAuth';
+import { Card, SearchBar, Badge, AudioPlayer, Loader, ImageSliderModal } from '../../components/common';
+import { getCirculars } from '../../services/circularService';
+
+// Helper to determine content type from URL or message
+function getContentType(circular) {
+  const imageUrl = circular.event_image;
+
+  if (!imageUrl) return 'notice';
+
+  const lowerUrl = imageUrl.toLowerCase();
+
+  // Audio files
+  if (lowerUrl.includes('.wav') || lowerUrl.includes('.mp3') || lowerUrl.includes('.ogg')) {
+    return 'audio';
+  }
+
+  // Image files
+  if (lowerUrl.includes('.jpg') || lowerUrl.includes('.jpeg') || lowerUrl.includes('.png') || lowerUrl.includes('.gif') || lowerUrl.includes('.webp')) {
+    return 'image';
+  }
+
+  // Document files
+  if (lowerUrl.includes('.pdf')) return 'pdf';
+  if (lowerUrl.includes('.doc') || lowerUrl.includes('.docx')) return 'document';
+  if (lowerUrl.includes('.xls') || lowerUrl.includes('.xlsx')) return 'document';
+
+  // Video files
+  if (lowerUrl.includes('.mp4') || lowerUrl.includes('.mov') || lowerUrl.includes('.avi')) {
+    return 'video';
+  }
+
+  return 'image';
+}
 
 // Circular Type Icon Component
 function CircularTypeIcon({ type }) {
@@ -70,175 +103,126 @@ function CircularTypeIcon({ type }) {
 }
 
 // For Badge Component
-function ForBadge({ forStudent, studentClass }) {
-  const isForAll = forStudent === 'All Students';
-
+function ForBadge({ studentName, adno }) {
   return (
-    <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-semibold ${
-      isForAll
-        ? 'bg-slate-100 text-slate-700'
-        : 'bg-indigo-50 text-indigo-700'
-    }`}>
+    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-700">
       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
       </svg>
-      For: {forStudent}{studentClass && ` (${studentClass})`}
+      For: {studentName}
     </div>
   );
 }
 
-// Attachment Component
-function Attachment({ name, size, type }) {
-  const typeIcons = {
-    pdf: (
-      <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
-      </svg>
-    ),
-    doc: (
-      <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
-      </svg>
-    ),
-  };
+// Parse date from API format "07,Jan-13:53"
+function parseCircularDate(dateStr) {
+  if (!dateStr) return '';
 
-  return (
-    <div className="flex items-center gap-3 bg-slate-50 rounded-lg p-2 pr-4 border border-slate-200 cursor-pointer hover:bg-slate-100 transition-colors">
-      <div className="w-8 h-8 bg-white rounded flex items-center justify-center shadow-sm">
-        {typeIcons[type] || typeIcons.doc}
-      </div>
-      <div className="flex flex-col">
-        <span className="text-xs font-semibold text-slate-900">{name}</span>
-        <span className="text-[10px] text-slate-500">{size}</span>
-      </div>
-    </div>
-  );
-}
-
-// Image Gallery Component
-function ImageGallery({ images }) {
-  const displayImages = images.slice(0, 3);
-  const remainingCount = images.length - 3;
-
-  return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-      {displayImages.map((image, index) => (
-        <div
-          key={index}
-          className="aspect-video bg-slate-200 rounded-lg overflow-hidden relative group cursor-pointer"
-        >
-          {index === 2 && remainingCount > 0 ? (
-            <>
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
-                <span className="text-white font-bold text-lg">+{remainingCount}</span>
-              </div>
-              <img
-                src={image}
-                alt={`Gallery ${index + 1}`}
-                className="w-full h-full object-cover blur-[1px]"
-              />
-            </>
-          ) : (
-            <img
-              src={image}
-              alt={`Gallery ${index + 1}`}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// Video Player Component
-function VideoThumbnail({ thumbnail, duration }) {
-  return (
-    <div className="relative w-full max-w-lg aspect-video bg-black rounded-xl overflow-hidden group cursor-pointer">
-      <img
-        src={thumbnail}
-        alt="Video thumbnail"
-        className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity"
-      />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
-            <svg className="w-5 h-5 text-primary-600 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <span className="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded">
-        {duration}
-      </span>
-    </div>
-  );
+  // Format: "07,Jan-13:53"
+  try {
+    const [datePart, timePart] = dateStr.split('-');
+    const [day, month] = datePart.split(',');
+    return `${day} ${month}, ${timePart}`;
+  } catch {
+    return dateStr;
+  }
 }
 
 // Circular Card Component
-function CircularCard({ circular }) {
+function CircularCard({ circular, onImageClick }) {
+  const type = getContentType(circular);
+  const message = circular.Message || circular.message || '';
+  const studentName = circular.STUDENTNAME || circular.studentName || 'Student';
+  const dateStr = parseCircularDate(circular.SMSdate || circular.smsDate);
+  const imageUrl = circular.event_image;
+
+  // Check if it's a new message (within last 24 hours - simplified check)
+  const isNew = circular.SMSdate?.includes('Today') || false;
+
   return (
     <Card className="p-6 hover:shadow-md transition-shadow">
       {/* For Badge */}
       <div className="mb-4">
-        <ForBadge forStudent={circular.forStudent} studentClass={circular.studentClass} />
+        <ForBadge studentName={studentName} adno={circular.ADNO} />
       </div>
 
       <div className="flex items-start gap-4">
         {/* Type Icon */}
-        <div className="flex-shrink-0">
-          <CircularTypeIcon type={circular.type} />
+        <div className="shrink-0">
+          <CircularTypeIcon type={type} />
         </div>
 
         {/* Content */}
-        <div className="flex-1 min-w-0">
+        <div className="grow min-w-0">
           <div className="flex justify-between items-start gap-2">
-            <h3 className="font-bold text-lg text-slate-900 mb-1">{circular.title}</h3>
-            {circular.isNew && (
+            <h3 className="font-bold text-lg text-slate-900 mb-1">
+              {type === 'notice' ? 'Notification' : type.charAt(0).toUpperCase() + type.slice(1) + ' Notice'}
+            </h3>
+            {isNew && (
               <Badge variant="primary" size="sm">New</Badge>
             )}
           </div>
 
-          <p className="text-slate-500 text-sm mb-4 line-clamp-2">
-            {circular.description}
+          <p className="text-slate-600 text-sm mb-4 whitespace-pre-wrap">
+            {message}
           </p>
 
-          {/* Attachment */}
-          {circular.attachment && (
-            <div className="flex items-center gap-4 mb-3">
-              <Attachment
-                name={circular.attachment.name}
-                size={circular.attachment.size}
-                type={circular.attachment.type}
-              />
-            </div>
-          )}
-
           {/* Audio Player */}
-          {circular.type === 'audio' && circular.audioUrl && (
+          {type === 'audio' && imageUrl && (
             <div className="mb-3">
-              <AudioPlayer src={circular.audioUrl} duration={circular.audioDuration} />
+              <AudioPlayer src={imageUrl} />
             </div>
           )}
 
-          {/* Image Gallery */}
-          {circular.type === 'image' && circular.images && (
+          {/* Image - Clickable to open slider */}
+          {type === 'image' && imageUrl && (
             <div className="mb-3">
-              <ImageGallery images={circular.images} />
+              <div
+                className="relative aspect-video max-w-md bg-slate-100 rounded-lg overflow-hidden group cursor-pointer"
+                onClick={() => onImageClick && onImageClick([imageUrl], 0)}
+              >
+                <img
+                  src={imageUrl}
+                  alt="Attachment"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <div className="bg-white rounded-full p-2 shadow-lg">
+                    <svg className="w-6 h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
-          {/* Video */}
-          {circular.type === 'video' && circular.videoThumbnail && (
+          {/* Document/PDF */}
+          {(type === 'pdf' || type === 'document') && imageUrl && (
             <div className="mb-3">
-              <VideoThumbnail thumbnail={circular.videoThumbnail} duration={circular.videoDuration} />
+              <a
+                href={imageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 transition-colors"
+              >
+                <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
+                </svg>
+                <span className="text-sm font-medium text-slate-700">View Document</span>
+                <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
             </div>
           )}
 
           {/* Timestamp */}
           <div className="flex justify-end">
-            <span className="text-xs text-slate-500">{circular.timestamp}</span>
+            <span className="text-xs text-slate-500">{dateStr}</span>
           </div>
         </div>
       </div>
@@ -247,103 +231,103 @@ function CircularCard({ circular }) {
 }
 
 function Circulars() {
+  const { user, selectedStudent } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
+  const [circularsList, setCircularsList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [totalSize, setTotalSize] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [sliderImages, setSliderImages] = useState(null);
+  const [sliderInitialIndex, setSliderInitialIndex] = useState(0);
+  const pageSize = 10;
 
-  // Mock data - will be replaced with API calls
-  const circularsList = [
-    {
-      id: 1,
-      type: 'pdf',
-      title: 'Annual Sports Day Guidelines',
-      description: 'Please find attached the detailed guidelines and schedule for the upcoming Annual Sports Day. Ensure all participants read through the rules carefully.',
-      forStudent: 'Pranav OG',
-      studentClass: 'Class IV-C',
-      isNew: true,
-      timestamp: 'Oct 24, 2023 - 10:30 AM',
-      attachment: {
-        name: 'Sports_Day_2024.pdf',
-        size: '2.4 MB',
-        type: 'pdf',
-      },
-    },
-    {
-      id: 2,
-      type: 'audio',
-      title: "Principal's Welcome Note",
-      description: 'A special welcome message from our Principal regarding the new academic term.',
-      forStudent: 'Arivumathi V',
-      studentClass: 'Class I-A',
-      isNew: false,
-      timestamp: 'Oct 23, 2023 - 09:00 AM',
-      audioUrl: '/audio/welcome.mp3',
-      audioDuration: '1:45',
-    },
-    {
-      id: 3,
-      type: 'image',
-      title: 'Science Exhibition Highlights',
-      description: "We are thrilled to share some glimpses from yesterday's Science Exhibition. The students' projects were truly innovative!",
-      forStudent: 'Pranav OG',
-      studentClass: 'Class IV-C',
-      isNew: false,
-      timestamp: 'Oct 22, 2023 - 2:15 PM',
-      images: [
-        'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&h=300&fit=crop',
-        'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop',
-        'https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=400&h=300&fit=crop',
-        'https://images.unsplash.com/photo-1567427018141-0584cfcbf1b8?w=400&h=300&fit=crop',
-        'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=400&h=300&fit=crop',
-      ],
-    },
-    {
-      id: 4,
-      type: 'video',
-      title: 'Annual Day Rehearsal Video',
-      description: 'Watch the dance rehearsal for Class 5. Parents are requested to ensure costumes are ready by Friday.',
-      forStudent: 'Arivumathi V',
-      studentClass: 'Class I-A',
-      isNew: false,
-      timestamp: 'Oct 20, 2023 - 11:00 AM',
-      videoThumbnail: 'https://images.unsplash.com/photo-1547153760-18fc86324498?w=600&h=400&fit=crop',
-      videoDuration: '04:32',
-    },
-    {
-      id: 5,
-      type: 'document',
-      title: 'Updated Holiday Homework List',
-      description: 'The holiday homework list has been updated with a few changes for Mathematics and English. Please refer to the attached document.',
-      forStudent: 'Pranav OG',
-      studentClass: 'Class IV-C',
-      isNew: false,
-      timestamp: 'Oct 18, 2023 - 03:45 PM',
-      attachment: {
-        name: 'Homework_Updated.docx',
-        size: '128 KB',
-        type: 'doc',
-      },
-    },
-    {
-      id: 6,
-      type: 'notice',
-      title: 'Early Dismissal Notice',
-      description: 'Dear Parents, Please be informed that the school will dismiss at 12:30 PM tomorrow, Friday, Oct 27th, due to the staff development workshop. Buses will depart at 12:45 PM. Please make necessary arrangements to pick up your ward on time.',
-      forStudent: 'All Students',
-      studentClass: null,
-      isNew: false,
-      timestamp: 'Oct 15, 2023 - 08:00 AM',
-    },
-  ];
+  // Get mobile number helper
+  const getMobileNumber = () => {
+    return selectedStudent?.contact || selectedStudent?.CONTACT ||
+           user?.mobile_no || user?.contact || user?.mobileNumber;
+  };
+
+  // Handle image click to open slider
+  const handleImageClick = (images, index) => {
+    setSliderImages(images);
+    setSliderInitialIndex(index);
+  };
+
+  // Fetch initial circulars data
+  useEffect(() => {
+    const fetchCirculars = async () => {
+      const mobileNumber = getMobileNumber();
+
+      if (!mobileNumber) {
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
+      setCurrentPage(0);
+      setCircularsList([]);
+
+      try {
+        const result = await getCirculars(mobileNumber, pageSize, 0);
+
+        if (result.success) {
+          const responseData = result.data?.data || result.data || [];
+          const data = Array.isArray(responseData) ? responseData : [];
+          setCircularsList(data);
+          setTotalSize(result.data?.total_size || data.length);
+        } else {
+          setCircularsList([]);
+        }
+      } catch (err) {
+        console.error('Error fetching circulars:', err);
+        setCircularsList([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCirculars();
+  }, [user, selectedStudent]);
+
+  // Load more circulars
+  const handleLoadMore = async () => {
+    if (loadingMore) return;
+
+    const mobileNumber = getMobileNumber();
+    if (!mobileNumber) return;
+
+    setLoadingMore(true);
+    const nextPage = currentPage + 1;
+
+    try {
+      const result = await getCirculars(mobileNumber, pageSize, nextPage * pageSize);
+
+      if (result.success) {
+        const responseData = result.data?.data || result.data || [];
+        const data = Array.isArray(responseData) ? responseData : [];
+        if (data.length > 0) {
+          setCircularsList(prev => [...prev, ...data]);
+          setCurrentPage(nextPage);
+        }
+      }
+    } catch (err) {
+      console.error('Error loading more circulars:', err);
+    } finally {
+      setLoadingMore(false);
+    }
+  };
 
   // Filter circulars based on search query
   const filteredCirculars = circularsList.filter((circular) => {
     if (!searchQuery) return true;
     const query = searchQuery.toLowerCase();
-    return (
-      circular.title.toLowerCase().includes(query) ||
-      circular.description.toLowerCase().includes(query) ||
-      circular.forStudent.toLowerCase().includes(query)
-    );
+    const message = (circular.Message || circular.message || '').toLowerCase();
+    const studentName = (circular.STUDENTNAME || circular.studentName || '').toLowerCase();
+    return message.includes(query) || studentName.includes(query);
   });
+
+  const hasMore = circularsList.length < totalSize;
 
   return (
     <div className="flex flex-col gap-6">
@@ -356,32 +340,74 @@ function Circulars() {
         />
       </div>
 
+      {/* Loading State */}
+      {loading && (
+        <div className="flex justify-center py-12">
+          <Loader size="lg" />
+        </div>
+      )}
+
       {/* Circulars List */}
-      <div className="flex flex-col gap-6">
-        {filteredCirculars.length > 0 ? (
-          filteredCirculars.map((circular) => (
-            <CircularCard key={circular.id} circular={circular} />
-          ))
-        ) : (
-          <Card className="p-8 text-center">
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-                </svg>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900">No circulars found</h3>
-                <p className="text-sm text-slate-500 mt-1">
-                  {searchQuery
-                    ? 'Try adjusting your search query'
-                    : 'No announcements available at the moment'}
-                </p>
-              </div>
+      {!loading && (
+        <>
+          <div className="flex flex-col gap-6">
+            {filteredCirculars.length > 0 ? (
+              filteredCirculars.map((circular, index) => (
+                <CircularCard
+                  key={`${circular.ADNO}-${circular.SMSdate}-${index}`}
+                  circular={circular}
+                  onImageClick={handleImageClick}
+                />
+              ))
+            ) : (
+              <Card className="p-8 text-center">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center">
+                    <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-900">No circulars found</h3>
+                    <p className="text-sm text-slate-500 mt-1">
+                      {searchQuery
+                        ? 'Try adjusting your search query'
+                        : 'No announcements available at the moment'}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            )}
+          </div>
+
+          {/* Load More / Pagination Info */}
+          {filteredCirculars.length > 0 && (
+            <div className="flex flex-col items-center gap-4 py-4">
+              <p className="text-sm text-slate-500">
+                Showing {filteredCirculars.length} of {totalSize} circulars
+              </p>
+              {hasMore && !searchQuery && (
+                <button
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                  className="px-6 py-2 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50"
+                >
+                  {loadingMore ? 'Loading...' : 'Load More'}
+                </button>
+              )}
             </div>
-          </Card>
-        )}
-      </div>
+          )}
+        </>
+      )}
+
+      {/* Image Slider Modal */}
+      {sliderImages && sliderImages.length > 0 && (
+        <ImageSliderModal
+          images={sliderImages}
+          initialIndex={sliderInitialIndex}
+          onClose={() => setSliderImages(null)}
+        />
+      )}
     </div>
   );
 }

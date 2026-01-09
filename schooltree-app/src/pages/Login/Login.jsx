@@ -330,6 +330,14 @@ function Login() {
         {/* Footer Gradient */}
         <div className="h-1.5 w-full bg-gradient-to-r from-blue-300 via-primary-600 to-blue-600"></div>
       </div>
+
+      {/* Terms text below the card */}
+      <p className="text-center text-sm text-gray-500 mt-6">
+        By logging in, you agree to Alpha Portal's{' '}
+        <a href="#" className="text-primary-600 hover:underline">Terms of Service</a>
+        {' '}and{' '}
+        <a href="#" className="text-primary-600 hover:underline">Privacy Policy</a>.
+      </p>
     </AuthLayout>
   );
 }

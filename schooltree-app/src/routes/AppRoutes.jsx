@@ -13,6 +13,7 @@ import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import Homework from '../pages/Homework';
 import Circulars from '../pages/Circulars';
+import Attendance from '../pages/Attendance';
 import { FeePayment, PaymentSuccess } from '../pages/Fees';
 import ExamSchedule from '../pages/Exams';
 import ViewMarks from '../pages/Marks';
@@ -66,6 +67,14 @@ function AppRoutes() {
         element={
           <ProtectedPage>
             <Circulars />
+          </ProtectedPage>
+        }
+      />
+      <Route
+        path={ROUTES.ATTENDANCE}
+        element={
+          <ProtectedPage>
+            <Attendance />
           </ProtectedPage>
         }
       />

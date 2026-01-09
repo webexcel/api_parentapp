@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { Card, Loader } from '../../components/common';
 import { ROUTES } from '../../utils/constants';
-import { fetchDashboardData, getFlashMessage } from '../../services/dashboardService';
-import FlashMessageModal from '../../components/FlashMessageModal';
+import { fetchDashboardData, getLatestMessageWebsite } from '../../services/dashboardService';
 
 // Stat Card Component
 function StatCard({ title, value, subtitle, icon, iconBg, loading }) {
@@ -28,23 +27,32 @@ function StatCard({ title, value, subtitle, icon, iconBg, loading }) {
   );
 }
 
-// Activity Item Component
-function ActivityItem({ icon, iconBg, iconColor, title, description, time, forStudent, isLast }) {
+// News Card Component - Clickable card that opens link
+function NewsCard({ title, link, isLast }) {
+  const handleClick = () => {
+    if (link) {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
-    <div className={`p-4 ${!isLast ? 'border-b border-slate-100' : ''} hover:bg-slate-50 transition-colors flex gap-4`}>
-      <div className={`h-10 w-10 rounded-full ${iconBg} flex items-center justify-center shrink-0 ${iconColor}`}>
-        {icon}
+    <div
+      onClick={handleClick}
+      className={`p-4 ${!isLast ? 'border-b border-slate-100' : ''} hover:bg-primary-50 transition-colors cursor-pointer flex items-center gap-3`}
+    >
+      <div className="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center shrink-0 text-primary-600">
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clipRule="evenodd" />
+        </svg>
       </div>
       <div className="flex-1 min-w-0">
-        <div className="flex justify-between items-start gap-2">
-          <p className="text-sm font-semibold text-slate-900 truncate">{title}</p>
-          <span className="text-xs text-slate-400 shrink-0">{time}</span>
-        </div>
-        <p className="text-sm text-slate-500 mt-0.5 line-clamp-2">{description}</p>
-        {forStudent && (
-          <p className="text-xs text-primary-600 mt-2 font-medium">For: {forStudent}</p>
-        )}
+        <p className="text-sm font-medium text-slate-900 line-clamp-2">{title}</p>
       </div>
+      {link && (
+        <svg className="w-5 h-5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      )}
     </div>
   );
 }
@@ -73,6 +81,8 @@ function QuickActionCard({ icon, label, to }) {
 function Dashboard() {
   const { user, selectedStudent, students } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [newsLoading, setNewsLoading] = useState(true);
+  const [latestNews, setLatestNews] = useState([]);
   const [dashboardData, setDashboardData] = useState({
     attendance: null,
     feesBalance: null,
@@ -80,31 +90,6 @@ function Dashboard() {
     latestMessages: null,
     batchCount: null,
   });
-
-  // Flash message modal state
-  const [showFlashModal, setShowFlashModal] = useState(false);
-  const [flashMessage, setFlashMessage] = useState(null);
-
-  // Fetch flash message on mount
-  useEffect(() => {
-    const loadFlashMessage = async () => {
-      try {
-        const result = await getFlashMessage();
-        if (result.success && result.data) {
-          const messageData = result.data?.data || result.data;
-          // Check if there's a valid flash message
-          if (messageData && (messageData.message || messageData.MESSAGE || messageData.title || messageData.TITLE)) {
-            setFlashMessage(messageData);
-            setShowFlashModal(true);
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching flash message:', error);
-      }
-    };
-
-    loadFlashMessage();
-  }, []);
 
   // Fetch dashboard data when component mounts or student changes
   useEffect(() => {
@@ -126,32 +111,87 @@ function Dashboard() {
     loadDashboardData();
   }, [selectedStudent, user]);
 
+  // Fetch latest news from getLatestMessageWebsite
+  useEffect(() => {
+    const loadLatestNews = async () => {
+      setNewsLoading(true);
+      try {
+        const result = await getLatestMessageWebsite();
+        if (result.success && result.data) {
+          const data = result.data?.data || result.data || [];
+          setLatestNews(Array.isArray(data) ? data : []);
+        }
+      } catch (error) {
+        console.error('Error fetching latest news:', error);
+      } finally {
+        setNewsLoading(false);
+      }
+    };
+
+    loadLatestNews();
+  }, []);
+
   // Get student name and class from selectedStudent
   const studentName = selectedStudent?.NAME || selectedStudent?.SNAME || selectedStudent?.name || 'Student';
   const studentClass = selectedStudent?.CLASSSEC || selectedStudent?.class || '';
 
-  // Calculate attendance percentage
+  // Helper to get batch count data by label
+  const getBatchDataByLabel = (label) => {
+    const batchData = dashboardData.batchCount?.data?.data || dashboardData.batchCount?.data;
+    if (Array.isArray(batchData)) {
+      return batchData.find(item => item.label === label);
+    }
+    return null;
+  };
+
+  // Calculate attendance percentage from batchCount
   const getAttendanceValue = () => {
+    const attendanceItem = getBatchDataByLabel('attendance');
+    if (attendanceItem) {
+      const count = parseFloat(attendanceItem.count);
+      if (!isNaN(count)) {
+        return `${count}%`;
+      }
+      if (attendanceItem.status === 'No Data') {
+        return 'No Data';
+      }
+    }
+    // Fallback to old API response
     const attendanceData = dashboardData.attendance?.data?.data || dashboardData.attendance?.data;
     if (attendanceData?.percentage) return `${attendanceData.percentage}%`;
-    if (attendanceData?.present && attendanceData?.total) {
-      return `${Math.round((attendanceData.present / attendanceData.total) * 100)}%`;
-    }
     return '--';
   };
 
-  // Get pending homework count
+  // Get pending homework count from batchCount
   const getHomeworkValue = () => {
+    const homeworkItem = getBatchDataByLabel('homework');
+    if (homeworkItem) {
+      const count = parseInt(homeworkItem.count);
+      if (!isNaN(count)) {
+        return count > 0 ? `${count} Pending` : 'All Done';
+      }
+    }
+    // Fallback to old API response
     const homeworkData = dashboardData.homework?.data?.data || dashboardData.homework?.data;
     if (Array.isArray(homeworkData)) {
-      const pending = homeworkData.filter(h => !h.completed && !h.submitted).length;
-      return pending > 0 ? `${pending} Pending` : 'All Done';
+      return homeworkData.length > 0 ? `${homeworkData.length} Pending` : 'All Done';
     }
     return '--';
   };
 
-  // Get fees balance
+  // Get fees balance from batchCount
   const getFeesValue = () => {
+    const paymentItem = getBatchDataByLabel('payment_due');
+    if (paymentItem) {
+      const count = parseFloat(paymentItem.count);
+      if (!isNaN(count) && count > 0) {
+        return `₹${count.toLocaleString()}`;
+      }
+      if (paymentItem.payment_status === 'No Due') {
+        return 'Paid';
+      }
+    }
+    // Fallback to old API response
     const feesData = dashboardData.feesBalance?.data?.data || dashboardData.feesBalance?.data;
     if (feesData?.balance || feesData?.total_balance) {
       const balance = feesData.balance || feesData.total_balance;
@@ -160,11 +200,27 @@ function Dashboard() {
     return '--';
   };
 
-  // Get circular count
+  // Get fees subtitle
+  const getFeesSubtitle = () => {
+    const paymentItem = getBatchDataByLabel('payment_due');
+    if (paymentItem?.payment_status) {
+      return paymentItem.payment_status;
+    }
+    return 'Outstanding balance';
+  };
+
+  // Get circular count from batchCount
   const getCircularValue = () => {
+    const circularItem = getBatchDataByLabel('circulars');
+    if (circularItem) {
+      const count = parseInt(circularItem.count);
+      if (!isNaN(count)) {
+        return count > 0 ? `${count} New` : 'None';
+      }
+    }
+    // Fallback to old API response
     const batchData = dashboardData.batchCount?.data?.data || dashboardData.batchCount?.data;
     if (batchData?.count !== undefined) return `${batchData.count} New`;
-    if (batchData?.unread !== undefined) return `${batchData.unread} New`;
     return '--';
   };
 
@@ -194,7 +250,7 @@ function Dashboard() {
     {
       title: 'Fees Due',
       value: getFeesValue(),
-      subtitle: 'Outstanding balance',
+      subtitle: getFeesSubtitle(),
       icon: (
         <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
           <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
@@ -215,73 +271,6 @@ function Dashboard() {
       iconBg: 'bg-primary-50',
     },
   ];
-
-  // Build recent activity from API data
-  const buildRecentActivity = () => {
-    const activities = [];
-
-    // Add latest messages
-    const messagesData = dashboardData.latestMessages?.data?.data || dashboardData.latestMessages?.data;
-    if (Array.isArray(messagesData)) {
-      messagesData.slice(0, 3).forEach(msg => {
-        activities.push({
-          icon: (
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" clipRule="evenodd" />
-            </svg>
-          ),
-          iconBg: 'bg-primary-50',
-          iconColor: 'text-primary-600',
-          title: msg.title || msg.subject || 'Notification',
-          description: msg.message || msg.content || '',
-          time: msg.created_at ? new Date(msg.created_at).toLocaleDateString() : 'Recent',
-          forStudent: msg.student_name || studentName,
-        });
-      });
-    }
-
-    // Add homework items
-    const homeworkData = dashboardData.homework?.data?.data || dashboardData.homework?.data;
-    if (Array.isArray(homeworkData)) {
-      homeworkData.slice(0, 2).forEach(hw => {
-        activities.push({
-          icon: (
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-              <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
-            </svg>
-          ),
-          iconBg: 'bg-orange-50',
-          iconColor: 'text-orange-600',
-          title: `${hw.subject || hw.SUBJECT || 'Homework'} Assignment`,
-          description: hw.description || hw.homework || hw.HOMEWORK || '',
-          time: hw.date || hw.DATE || 'Recent',
-          forStudent: studentName,
-        });
-      });
-    }
-
-    // If no activities from API, show default message
-    if (activities.length === 0) {
-      activities.push({
-        icon: (
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-          </svg>
-        ),
-        iconBg: 'bg-slate-50',
-        iconColor: 'text-slate-600',
-        title: 'No recent activity',
-        description: 'Check back later for updates',
-        time: 'Now',
-        forStudent: null,
-      });
-    }
-
-    return activities;
-  };
-
-  const recentActivity = buildRecentActivity();
 
   const quickActions = [
     {
@@ -364,28 +353,30 @@ function Dashboard() {
 
       {/* Main Layout Columns */}
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Left Column: Activity Feed */}
+        {/* Left Column: Latest News */}
         <div className="flex-1 flex flex-col gap-6">
-          <h4 className="text-lg font-bold text-slate-900">Recent Activity</h4>
+          <h4 className="text-lg font-bold text-slate-900">Latest News</h4>
           <Card className="overflow-hidden">
-            {loading ? (
+            {newsLoading ? (
               <div className="p-8 flex justify-center">
                 <Loader size="md" />
               </div>
-            ) : (
-              recentActivity.map((activity, index) => (
-                <ActivityItem
-                  key={index}
-                  icon={activity.icon}
-                  iconBg={activity.iconBg}
-                  iconColor={activity.iconColor}
-                  title={activity.title}
-                  description={activity.description}
-                  time={activity.time}
-                  forStudent={activity.forStudent}
-                  isLast={index === recentActivity.length - 1}
+            ) : latestNews.length > 0 ? (
+              latestNews.map((news, index) => (
+                <NewsCard
+                  key={news.nid || index}
+                  title={news.Discription || news.description || 'News Update'}
+                  link={news.links || news.link || ''}
+                  isLast={index === latestNews.length - 1}
                 />
               ))
+            ) : (
+              <div className="p-8 text-center text-slate-500">
+                <svg className="w-12 h-12 mx-auto text-slate-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+                <p className="text-sm">No news available</p>
+              </div>
             )}
           </Card>
         </div>
@@ -434,13 +425,6 @@ function Dashboard() {
           </div>
         </div>
       </div>
-
-      {/* Flash Message Modal */}
-      <FlashMessageModal
-        isOpen={showFlashModal}
-        onClose={() => setShowFlashModal(false)}
-        message={flashMessage}
-      />
     </div>
   );
 }

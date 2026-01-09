@@ -17,7 +17,7 @@
         },
         {
             "key": "dbname",
-            "value": "appdemoo",
+            "value": "cresent",
             "type": "string"
         }
     ],
@@ -367,7 +367,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n  \"url\": \"https://demo.schooltree.in/uploads/appdemoo/image.jpg\"\n}"
+                            "raw": "{\n  \"url\": \"https://demo.schooltree.in/uploads/cresent/image.jpg\"\n}"
                         },
                         "url": {
                             "raw": "{{base_url}}/circular/getBase64",

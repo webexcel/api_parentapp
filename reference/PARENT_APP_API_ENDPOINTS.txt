@@ -71,7 +71,7 @@ Request Payload:
   "manufacturer_model": "Windows NT 10.0",
   "os_version": "Windows NT 10.0; Win64; x64",
   "app_version_code": "100",
-  "dbname": "appdemoo"
+  "dbname": "cresent"
 }
 
 
@@ -85,7 +85,7 @@ Request Payload:
 {
   "firebase_id": "qwertyuio",
   "mobile_no": "9600037999",
-  "dbname": "appdemoo"
+  "dbname": "cresent"
 }
 
 
@@ -99,7 +99,7 @@ Request Payload:
 {
   "id": "11T.W06E1E",
   "otp": "0000",
-  "dbname": "appdemoo"
+  "dbname": "cresent"
 }
 
 
@@ -345,7 +345,7 @@ Endpoint URL:  http://localhost:3005/api/circular/getBase64
 Request Payload:
 --------------------------------------------------
 {
-  "url": "https://demo.schooltree.in/uploads/appdemoo/Screenshot_20250224_100220_Gmail1740467389.jpg"
+  "url": "https://demo.schooltree.in/uploads/cresent/Screenshot_20250224_100220_Gmail1740467389.jpg"
 }
 
 

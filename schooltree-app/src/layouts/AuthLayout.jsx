@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 
 function AuthLayout({ children }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex flex-col">
       {/* Header */}
-      <header className="absolute top-0 left-0 right-0 px-6 py-4 flex items-center justify-between">
+      <header className="px-6 py-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
             <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -22,22 +22,12 @@ function AuthLayout({ children }) {
       </header>
 
       {/* Main Content */}
-      <main className="min-h-screen flex items-center justify-center px-4 py-20">
+      <main className="flex-1 flex flex-col items-center justify-center px-4 py-8">
         {children}
       </main>
 
-      {/* Footer */}
-      <footer className="absolute bottom-0 left-0 right-0 py-4 text-center text-sm text-gray-500">
-        By logging in, you agree to Alpha Portal's{' '}
-        <Link to="#" className="text-primary-600 hover:underline">
-          Terms of Service
-        </Link>{' '}
-        and{' '}
-        <Link to="#" className="text-primary-600 hover:underline">
-          Privacy Policy
-        </Link>
-        .
-      </footer>
+      {/* Footer spacer */}
+      <div className="h-4 shrink-0"></div>
     </div>
   );
 }
